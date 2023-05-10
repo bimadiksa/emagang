@@ -1,0 +1,236 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+  margin: 0 auto;
+  margin-top: 6rem;
+  padding: 0;
+}
+
+.container h1 {
+  margin: 0;
+  font-size: 25px;
+  color: #7227fe;
+}
+
+.container button {
+  border-radius: 5px;
+  border: 0;
+  padding: 2px 5px;
+  margin-top: 20px;
+  background-color: #7227fe;
+  color: white;
+}
+
+.tambah {
+  background-color: #7227fe;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+/* POPUP */
+.popup {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.popup-content {
+  background-color: #fefefe;
+  margin: 10% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 50%;
+}
+
+/* styling for the date input */
+input[type="date"] {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  color: #555;
+  outline: none;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* styling for the date input on hover */
+input[type="date"]:hover {
+  border-color: #666;
+}
+
+/* styling for the date input when focused */
+input[type="date"]:focus {
+  border-color: #666;
+  box-shadow: 0 0 5px rgba(102, 102, 102, 0.5);
+}
+
+/* styling for the textarea */
+textarea {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  color: #555;
+  outline: none;
+  width: 100%;
+  height: 100px;
+  box-sizing: border-box;
+}
+
+/* styling for the file input */
+.file-upload {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+}
+
+.file-upload input[type="file"] {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0;
+  padding: 0;
+  font-size: 20px;
+  cursor: pointer;
+  opacity: 0;
+  filter: alpha(opacity=0);
+}
+
+.file-upload label {
+  display: inline-block;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  background-color: #2196f3;
+  color: #fff;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.file-upload label:hover {
+  background-color: #0d8bf2;
+}
+
+.upload-btn {
+  background-color: #f0f0f0;
+  color: #666;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  width: 100%;
+  text-align: center;
+}
+
+.upload-btn:hover {
+  background-color: #ddd;
+}
+
+#preview-image {
+  display: block;
+  margin: 10px auto;
+}
+
+/* styling for the submit button */
+button.simpan {
+  background-color: #7227fe;
+  color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  width: 100%;
+  text-align: center;
+}
+
+button.simpan:hover {
+  background-color: #0d8bf2;
+}
+
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* DESAIN TABEL */
+.tabeljurnal {
+  overflow-x: auto;
+  margin: 0;
+  background-color: white;
+  border-radius: 25px;
+  border: 0;
+  margin-top: 2rem;
+  margin-left: 3rem;
+  margin-right: 3rem;
+  padding: 2rem;
+}
+
+table {
+  border-collapse: collapse;
+  width: 80%;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 5px;
+  border: 1px solid #7227fe;
+}
+
+th {
+  background-color: #7227fe;
+  color: white;
+}
+
+td img {
+  height: 100px;
+  width: 150px;
+}
+
+td button {
+  align-items: center;
+  flex-direction: column;
+  background-color: transparent;
+  border: 0;
+}
+
+@media (max-width: 768px) {
+  .tabeljurnal table {
+    width: 100%;
+  }
+  td img {
+    height: auto;
+    width: 100%;
+    max-width: 200px;
+    margin: 0 auto;
+    display: block;
+  }
+  td button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}

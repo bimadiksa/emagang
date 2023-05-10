@@ -1,0 +1,326 @@
+nav {
+  background-color: #fff;
+  font-size: 15px;
+  font-weight: bold;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+}
+body {
+  font-family: "Poppins", sans-serif;
+  font-size: 15px;
+  font-weight: bold;
+  min-height: auto;
+  flex: auto;
+}
+.btn-purple {
+  background-color: #7227fe;
+  color: #fff;
+  border-radius: 20px;
+  font-size: 15px;
+  text-align: center;
+  width: 100px;
+  padding: 5px;
+}
+.btn-purple:hover {
+  background-color: #5c1df3;
+  color: #fff;
+}
+/* style untuk HERO/landing */
+.hore {
+  padding-top: 50px;
+  background-color: #7227fe;
+}
+.hero {
+  background-color: #7227fe;
+  padding-top: 60px;
+}
+.judul {
+  font-weight: bolder;
+  font-size: 35px;
+  position: relative; /* agar bisa diatur posisinya */
+  left: -100%; /* awalnya tulisan berada di luar layar di sebelah kiri */
+  animation: judul 1s ease forwards; /* animasi dengan durasi 1 detik */
+}
+.deskripsi {
+  font-weight: lighter;
+  font-size: 18px;
+  position: relative; /* agar bisa diatur posisinya */
+  left: -100%; /* awalnya tulisan berada di luar layar di sebelah kiri */
+  animation: deskripsi 1s ease forwards; /* animasi dengan durasi 1 detik */
+}
+.judul .deskripsi {
+  font-family: "Poppins", sans-serif;
+}
+@keyframes judul {
+  to {
+    left: 0; /* tulisan bergerak ke arah kanan hingga muncul di layar */
+  }
+}
+@keyframes deskripsi {
+  to {
+    left: 0; /* tulisan bergerak ke arah kanan hingga muncul di layar */
+  }
+}
+.btn-oke {
+  background-color: transparent;
+  color: #fff;
+  border-radius: 10px;
+  border-color: #fff;
+  font-size: 20px;
+  font-weight: bolder;
+  text-align: center;
+  font-weight: bolder;
+  font-family: "Poppins", sans-serif;
+}
+.gambarungu {
+  padding-top: 2rem;
+  position: relative; /* agar bisa diatur posisinya */
+  right: -100%;
+  animation: gambarungu 1s ease forwards; /* animasi dengan durasi 1 detik */
+}
+@keyframes gambarungu {
+  to {
+    right: 0;
+  }
+}
+
+/* style untuk tujuan */
+.boxtujuan {
+  margin-left: 100px;
+  margin-right: 100px;
+}
+.YAHA {
+  text-align: center;
+  padding-bottom: 30px;
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  position: relative;
+  color: #7227fe;
+}
+.tujuancard {
+  padding: 300px;
+}
+.row {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  justify-items: center;
+}
+.card1 {
+  align-items: flex-start;
+  margin-top: 50px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+  padding: 1rem;
+  font-weight: 400;
+  font-size: 15px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  overflow: hidden;
+}
+
+.card2 {
+  align-items: flex-end;
+  margin-top: 50px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+  padding: 1rem;
+  font-weight: 400;
+  font-size: 15px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-left: auto;
+}
+
+/* css kelebihan e-magang */
+.kelebihan {
+  margin-bottom: 70px;
+}
+.Yuhu {
+  flex-wrap: wrap;
+  text-align: center;
+  padding-top: 120px;
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  position: relative;
+  color: #7227fe;
+}
+.title {
+  flex-wrap: wrap;
+  text-align: center;
+  color: #7227fe;
+  padding: auto;
+  font-size: medium;
+  font-weight: lighter;
+}
+.kartu-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 70px;
+}
+.kartu {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
+  width: 280px;
+  height: 400px;
+  left: 18px;
+  padding: 10px;
+  margin-top: 20px;
+  justify-content: center;
+  margin: 20px;
+}
+.kartu img {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  width: 150px;
+  height: 142px;
+  margin: auto;
+}
+.card-description {
+  text-align: center;
+  margin-top: 20px;
+}
+.card-description h3 {
+  font-size: 20px;
+  margin: 10px;
+  color: #7227fe;
+  font-weight: bolder;
+}
+
+.card-description p {
+  font-size: 16px;
+  margin: 10px;
+  color: #7227fe;
+  font-weight: lighter;
+}
+
+/* CSS Untuk section mokcup */
+.mockup {
+  background-color: #7227fe;
+  display: flex;
+}
+.Apps {
+  background-color: #7227fe;
+  padding: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/* CSS untuk section kontak kami */
+.contact-section {
+  padding: 80px 0;
+  margin-bottom: 90px;
+}
+.contact-section p {
+  margin-bottom: 70px;
+}
+
+.contact-section .container {
+  max-width: 960px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.contact-form {
+  display: inline-block;
+  justify-content: space-between;
+  text-align: left;
+}
+
+input[type="text"],
+input[type="email"],
+textarea {
+  width: 100%;
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #f3f3f3;
+  color: #727272;
+  border: 0;
+  border-radius: 5px;
+}
+
+textarea {
+  height: 150px;
+  background-color: #f3f3f3;
+  color: #727272;
+  border: 0;
+  border-radius: 5px;
+}
+
+button {
+  background-color: #7227fe;
+  color: #fff;
+  font-weight: bolder;
+  padding: 10px 20px;
+  border: 0;
+  border-radius: 5px;
+}
+
+/* footer */
+footer {
+  background-color: #7227fe;
+  color: #fff;
+  padding: 50px 0;
+}
+
+.footer-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.footer-section {
+  flex-basis: 25%;
+  padding: 20px;
+}
+
+.footer-section h3 {
+  margin-bottom: 20px;
+}
+
+.footer ul li {
+  margin-bottom: 10px;
+}
+
+.footer ul li i {
+  margin-right: 5px;
+}
+
+.links a {
+  color: #fff;
+}
+
+.social ul {
+  flex-direction: column;
+  list-style-type: none;
+  display: flex;
+  justify-content: start;
+  align-items: flex-start;
+}
+
+.social ul li {
+  margin: 0;
+}
+
+.social a {
+  color: #fff;
+  font-size: 14px;
+  text-decoration: none;
+  margin-right: 20px;
+}
+
+.footer-bottom {
+  text-align: center;
+  padding: 10px 0;
+  font-size: 14px;
+}

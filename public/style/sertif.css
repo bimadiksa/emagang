@@ -1,0 +1,53 @@
+body {
+    max-width: 100%;
+  }
+  .container {
+    margin-top: 6rem;
+  }
+  .nilai-magang {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #000000;
+    text-align: center;
+  }
+  
+  h1 {
+    font-size: 25px;
+    margin-top: 0;
+    color: #000000;
+    padding-bottom: 40px;
+  }
+  
+  .datamentor {
+    padding-bottom: 20px;
+  }
+  
+  h4 {
+    font-weight: 900;
+    font-size: small;
+    padding-bottom: 20px;
+  }
+  
+  .sertif {
+    max-width: 100%;
+    margin-top: 50px;
+    padding: 20px;
+    border: 1px solid #000000;
+    text-align: center;
+  }
+  
+  .textunduh {
+    color: grey;
+    font-style: italic;
+  }
+  
+  .tombolunduh {
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: 0;
+    background-color: #1c1a1e;
+    color: white;
+    font-weight: 700;
+  }
+  

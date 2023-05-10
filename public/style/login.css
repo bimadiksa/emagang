@@ -1,0 +1,140 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+}
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  height: 100vh;
+}
+.login-form {
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 5rem;
+  padding-bottom: 100px;
+  margin-bottom: 8rem;
+  margin: auto;
+  background-color: #fff;
+  color: #7227fe;
+}
+.login-form p {
+  display: flex;
+  margin-bottom: 10px;
+}
+.login-form h2 {
+  margin-bottom: 40px;
+  color: #7227fe;
+  font-weight: 1000px;
+  font-size: xx-large;
+}
+
+
+
+/* Login CSS */
+/* .login-form input[type="email"],
+.login-form input[type="password"] {
+  justify-content: center;
+  align-items: flex-start;
+  width: 70%;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #ededed;
+  margin-bottom: 20px;
+  box-sizing: border-box;
+  background-color: #d9d9d9;
+  width: 340px;
+  left: 753px;
+  top: 376px;
+} */
+.input-group.my-custom-width {
+  width: 120%;
+  margin: auto;
+}
+
+.login-form button[type="submit"] {
+  padding: 10px;
+  background-color: #7227fe;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+  font-weight: bold;
+  font-size: medium;
+  margin-bottom: 1rem;
+  margin-top: 10px;
+  width: 100px;
+}
+
+.login-form button[type="submit"]:hover {
+  background-color: #fff;
+  color: #7227fe;
+  border-color: #7227fe;
+  font-weight: bold;
+  font-size: medium;
+}
+.password-field {
+  padding-right: 30px;
+}
+.password-toggle-btn {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  font-size: 18px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+/* REGISTER CSS */
+.register {
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-left: 10rem;
+  background-color: #7227fe;
+  transform: skew(-10deg);
+  transform-origin: top right;
+  position: relative;
+  width: 100%;
+  margin-left: -5rem;
+}
+
+.register-form h3 {
+  margin-bottom: 15px;
+  color: #fff;
+  transform: skew(10deg);
+}
+.register-form p {
+  margin-bottom: 25px;
+  color: #fff;
+  transform: skew(10deg);
+  margin-left: 8px;
+  padding-right: 100px;
+}
+.register-form button {
+  padding: 10px;
+  background-color: transparent;
+  color: #fff;
+  border-color: #fff;
+  border-width: 2px;
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: medium;
+  margin-bottom: 2rem;
+  margin-top: 20px;
+  margin-left: 20px;
+  width: 100px;
+  transform: skew(10deg);
+}

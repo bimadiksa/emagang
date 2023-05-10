@@ -1,0 +1,219 @@
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: #f1f1f1;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  height: 100vh;
+}
+
+.left {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-left: 55px;
+  padding-right: 55px;
+  padding-bottom: 300px;
+  margin-right: 20px;
+  background-color: #7227fe;
+  margin: 0 auto;
+}
+
+* POP UP */
+#popup {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+#popup form {
+  background-color: white;
+  padding: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+#popup h2 {
+  margin-top: 0;
+}
+
+#popup input[type="file"] {
+  display: block;
+  margin-bottom: 10px;
+}
+
+#popup button[type="submit"] {
+  background-color: #7227fe;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+#close-popup {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  font-size: 1.5rem;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+#close-popup:hover {
+  color: red;
+}
+/* AKHIR POP UP */
+
+.deskripsi {
+  color: white;
+  line-height: 2;
+  text-align: center;
+  font-size: 12px;
+  font-weight: bold;
+  max-width: 300px;
+  margin: 0 auto;
+  margin-top: 20px;
+}
+
+.ganti .tombol {
+  cursor: pointer;
+  margin-top: 20px;
+  background-color: transparent;
+  border: 1px solid white;
+  color: #fff;
+  padding: 10px;
+}
+
+.profile img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+/* bagian form data diri */
+.right {
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 50px;
+  padding-left: 150px;
+  padding-right: 0 auto;
+  padding-bottom: 90px;
+  margin: 0px;
+  background-color: #fff;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  font-weight: bold;
+  font-size: 15px;
+  margin-bottom: 5px;
+}
+
+input[id="name"],
+input[id="email"],
+input[id="telp"],
+input[id="alamat"],
+input[id="asal"],
+textarea {
+  padding: 15px;
+  margin-bottom: 30px;
+  border-radius: 4px;
+  border: 0;
+  width: 600px;
+  background-color: #f3f3f3;
+  resize: vertical;
+}
+
+input[id="about"],
+textarea {
+  justify-content: center;
+  margin-left: 10px;
+  padding: 15px;
+  margin-bottom: 30px;
+  border-radius: 4px;
+  border: 0;
+  width: 200px;
+  background-color: #f3f3f3;
+}
+
+input[id="tgl"],
+textarea {
+  padding: 15px;
+  margin-bottom: 30px;
+  margin-right: 40px;
+  border-radius: 4px;
+  border: 0;
+  width: 150px;
+  background-color: #f3f3f3;
+  resize: vertical;
+}
+
+.input-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+}
+
+.option {
+  background-color: white;
+  border-radius: 50px;
+  padding: 20px 20px;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.option:focus {
+  outline: none;
+  background-color: gray;
+  color: white;
+}
+
+button[type="submit"] {
+  background-color: #7227fe;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+button[type="submit"]:hover {
+  background-color: #7538e8;
+}
+
+.input-col {
+  margin-left: 195px;
+}
