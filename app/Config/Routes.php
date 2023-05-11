@@ -58,6 +58,8 @@ $routes->get('/reset_password/(:any)', 'LoginController::indexReset/$1');
 $routes->post('konfirmasi_reset_password', 'LoginController::resetPassword');
 //PASSWORD DEFAULT ADMIN
 $routes->get('password_baru', 'LoginController::indexModal');
+//CONTAC US
+$routes->post('kontak_kami', 'LoginController::contactUs');
 
 
 

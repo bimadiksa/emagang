@@ -417,4 +417,43 @@ class LoginController extends BaseController
 
         return redirect()->to('/login_view')->with('success', 'Password berhasil diubah');
     }
+
+    public function contactUs()
+    {
+        // Ambil data dari form
+        //$subject['subjek'] = $this->request->getVar('subject');
+        $fromEmail = (string) $this->request->getVar('email');
+        $message = $this->request->getVar('message');
+
+        //dd($subject);
+        // Inisialisasi library email
+
+        // Konfigurasi email
+        $emailConfig = config('Email');
+        // Inisialisasi library email
+        $email = \Config\Services::email();
+        $email->initialize($emailConfig);
+
+        // Set alamat email pengirim dan penerima
+        //$fromEmail = $emailConfig->$this->request->getVar('email');
+
+        $fromName = $this->request->getVar('name');
+
+        // Set alamat email pengirim dan penerima
+        $email->setTo('emagangkominfosanti@gmail.com');
+        $email->setFrom($fromEmail, $fromName);
+
+        // Set subjek dan isi pesan
+        $email->setSubject($fromEmail);
+        $email->setMessage($message);
+
+        // Kirim email
+        if ($email->send()) {
+            // Email berhasil dikirim
+            return redirect()->back()->with('success', 'Pesan telah berhasil dikirim!');
+        } else {
+            // Email gagal dikirim
+            return redirect()->back()->with('error', 'Terjadi kesalahan saat mengirim pesan. Silakan coba lagi nanti.');
+        }
+    }
 }

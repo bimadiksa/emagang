@@ -167,9 +167,11 @@
         <h2 class="YAHA">Kontak Kami</h2>
         <p class="title">Berikan masukkan pada kami untuk kedepannya. </p>
       </div>
-      <form class="contact-form">
+      <form class="contact-form" action="<?php echo base_url(); ?>/kontak_kami" method="post">
+        <?= csrf_field() ?>
         <input type="text" id="name" name="name" required placeholder="Nama">
-        <input type="email" id="email" name="Email" required placeholder="Email">
+        <input type="email" id="email" name="email" required placeholder="Email">
+
         <textarea id="message" name="message" required placeholder="Tuliskan pesan"></textarea>
         <button type="submit">Kirim</button>
       </form>
@@ -205,3 +207,40 @@
 </body>
 
 </html>
+
+<?php if (session()->has('success')) : ?>
+  <style>
+    /* CSS untuk mengatur warna teks menjadi putih */
+    .swal-toast-custom-class {
+      color: #FFF !important;
+    }
+  </style>
+  <script>
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      background: '#4CAF50', // Set warna background menjadi hijau
+      iconColor: '#FFF', // Set warna ikon menjadi putih
+      onOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+      }
+    });
+    Toast.fire({
+      icon: 'success',
+      title: '<?= session('success') ?>'
+    });
+  </script>
+<?php elseif (session()->has('error')) : ?>
+  <script>
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...Token Kadaluarsa',
+      text: '<?php echo session()->getFlashdata('error'); ?>',
+    })
+  </script>
+
+<?php endif; ?>
