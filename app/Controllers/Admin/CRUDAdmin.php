@@ -14,22 +14,11 @@ class CRUDAdmin extends BaseController
         helper(['form']);
         $data = [];
         // $data['instansiDinas'] = $this->adminModel->getInstansiUtama();
-        $data['output'] = $this->adminModel->getDataFromAPI();
+        $data['output'] = $this->instansiDinasModel->getDataFromAPI();
         $data['title'] = 'Tambah Akun Admin';
         $data['active_sidebar'] = 'admin_view';
         // dd($data);
         return view('/admin/tambahAdmin_view', $data);
-    }
-
-    public function indexInstansiDinas()
-    {
-        $data['title'] = 'Instansi Dinas';
-        $data['active_sidebar'] = 'instansi_dinas';
-
-        $data['output'] = $this->adminModel->getDataFromAPI();
-
-        // dd($data);
-        return view('/admin/instansiDinas_view', $data);
     }
 
     public function store()
@@ -97,7 +86,7 @@ class CRUDAdmin extends BaseController
         $data['title'] = 'Akun Admin';
         $data['active_sidebar'] = 'admin_view';
         $data['admins'] = $this->adminModel->findAll();
-        $data['output'] = $this->adminModel->getDataFromAPI();
+        $data['output'] = $this->instansiDinasModel->getDataFromAPI();
         // dd($data);
         return view('/admin/admin_view', $data);
     }

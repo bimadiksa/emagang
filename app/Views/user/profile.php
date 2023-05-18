@@ -2,106 +2,104 @@
 <html>
 
 <head>
-	<title>Profile</title>
+	<title>Profile Page</title>
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url('style/profile.css') ?>">
 	<link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
 </head>
 
 <body>
-	<div class="container">
-		<div class="left">
-			<div class="profile">
-				<img src="<?php echo base_url('assets/user.png') ?>" id="profile-picture-img" alt="Profile Picture">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-4 bg-purple">
+				<div class="profile">
+					<img src="<?php echo base_url('assets/user.png') ?>" id="profile-picture-img" alt="Profile Picture">
+				</div>
+				<div class="ganti">
+					<button class="btn btn-outline-light" id="edit-profile-picture">Ubah Foto Profile</button>
+				</div>
+				<div class="deskripsi">
+					<p>Siilahkan unggah foto profile anda untuk melengkapi data diri anda</p>
+				</div>
+				<div class="ganti">
+					<button class="btn btn-outline-light">Kembali</button>
+				</div>
 			</div>
-			<div class="ganti">
-				<button class="tombol" id="edit-profile-picture">Ubah Foto Profile</button>
-			</div>
+			<!-- pop up untuk upload foto -->
 			<div id="popup">
 				<form>
 					<h2>Ubah Foto Profil</h2>
-					<label for="profile-picture-file">Atau unggah foto baru:</label>
+					<label for="profile-picture-file">Unggah foto baru:</label>
 					<input type="file" id="profile-picture-file">
 					<button type="submit">Simpan</button>
 					<button type="button" id="close-popup">&times;</button>
 				</form>
 			</div>
-			<div class="deskripsi">
-				<p>Siilahkan unggah foto profile anda untuk melengkapi data diri anda</p>
-			</div>
-			<div class="ganti">
-				<button class="tombol">Kembali</button>
-			</div>
-		</div>
-		<div class="right">
-			<form>
-				<label for="name">Nama Lengkap</label>
-				<input type="name" id="name" name="name" placeholder="Nama Lengkap" value="<?= $anakMagang[0]['nama'] ?>" required>
-				<label for="email">Email</label>
-				<input type="email" id="email" name="email" placeholder="Email" value="<?= $anakMagang[0]['email'] ?>" required>
-				<!-- <label for="tgl">Tanggal Lahir</label>
-				<div class="input-grup">
-					<input type="number" name="tgl_lahir" id="tgl" min="1" max="31" placeholder="Tanggal" required>
-					<input type="number" name="bln_lahir" id="tgl" min="1" max="12" placeholder="Bulan" required>
-					<input type="number" name="thn_lahir" id="tgl" min="1900" max="2099" placeholder="Tahun" required>
-				</div> -->
-				<label for="id_prodi">Asal Instansi</label>
-				<div class="dropdown">
-					<input type="text" class="form-control dropdown-toggle" id="id_search" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" placeholder="Cari..." value="<?= $anakMagang[0]['nama_prodi'] . ' - ' . $anakMagang[0]['nama_jurusan'] . ' - ' . $anakMagang[0]['nama_instansi'] ?>">
-					<div class="dropdown-menu" aria-labelledby="id_prodi" style="position: absolute; top: 100%; left: 0; max-height: 200px; overflow-y: auto;" onshow="expandContent()">
-						<?php
-						foreach ($instansiAsal as $instansi) {
-							echo '<a class="dropdown-item" href="#" data-value="' . $instansi['id_prodi'] . '">' . $instansi['nama_prodi'] . ',' . $instansi['nama_jurusan'] . ',' . $instansi['nama_instansi'] . '</a>';
-						}
-						?>
+			<!-- Akhir Pop Up -->
+			<div class="col-md-8 bg-light">
+				<form>
+					<div class="form-group">
+						<label for="name">Nama Lengkap</label>
+						<input type="name" class="form-control" id="name" name="name" required>
 					</div>
-					<input type="hidden" id="id_prodi" name="id_prodi">
-				</div>
-				<label for="about">No Telp</label>
-				<input id="telp" name="telp" value="<?= $anakMagang[0]['no_hp'] ?>" required></input>
-				<label for="alamat">Alamat</label>
-				<input id="alamat" name="alamat" value="<?= $anakMagang[0]['alamat'] ?>" required></input>
-				<div class="input-group">
-					<div class="options">
+					<div class="form-group">
+						<label for="email">Email</label>
+						<input type="email" class="form-control" id="email" name="email" required>
+					</div>
+					<div class="form-group">
+						<label for="asal">Asal Instansi</label>
+						<input type="asal" id="asal" name="asal" required class="form-control" list="list-asal"></input>
+						<datalist id="list-asal"></datalist>
+					</div>
+					<div class="form-group">
+						<label for="telp">No Telp</label>
+						<input type="telp" class="form-control" id="telp" name="telp" required>
+					</div>
+					<div class="form-group">
+						<label for="alamat">Alamat</label>
+						<input type="alamat" class="form-control" id="alamat" name="alamat" required>
+					</div>
+					<div class="form-group">
 						<label for="about">Pekerjaan</label>
-						<?php if ($anakMagang[0]['nama_prodi'] == $anakMagang[0]['nama_jurusan']) : ?>
-							<label>
-								<input type="radio" name="jawaban" value="mahasiswa">Mahasiswa
+						<div class="form-check">
+							<input class="form-check-input" type="radio" name="jawaban" id="mahasiswa" value="mahasiswa">
+							<label class="form-check-label" for="mahasiswa">
+								Mahasiswa
 							</label>
-							<label>
-								<input type="radio" name="jawaban" value="siswa" checked>Siswa SMK
+						</div>
+						<div class="form-check">
+							<input class="form-check-input" type="radio" name="jawaban" id="siswa" value="siswa">
+							<label class="form-check-label" for="siswa">
+								Siswa SMA/SMK
 							</label>
-						<?php else : ?>
-							<label>
-								<input type="radio" name="jawaban" value="mahasiswa" checked>Mahasiswa
+						</div>
+						<div class="form-check">
+							<input class="form-check-input" type="radio" name="jawaban" id="lainnya" value="lainnya">
+							<label class="form-check-label" for="lainnya">
+								Lainnya
 							</label>
-							<label>
-								<input type="radio" name="jawaban" value="siswa">Siswa SMK
-							</label>
-						<?php endif; ?>
+						</div>
+						<input id="about" name="about" required class="form-control"></input>
 					</div>
-					<!-- <div class="input-col">
-						<label for="Lainnya">Lainnya</label>
-						<input id="about" name="about" required></input>
-					</div> -->
-				</div>
-			</form>
-			<div class="simpan">
-				<button type="submit">Simpan</button>
+					<div class="form-group">
+						<button type="submit" class="btn-submit">Simpan</button>
+					</div>
+				</form>
 			</div>
 		</div>
 	</div>
 
-
+	<!-- SCRIPT POP UP -->
 	<script>
-		// Ubah Profile
 		const editProfilePictureBtn = document.getElementById('edit-profile-picture');
 		const popup = document.getElementById('popup');
 		const profilePictureFile = document.getElementById('profile-picture-file');
 		const profilePictureImg = document.getElementById('profile-picture-img');
 		const closePopupBtn = document.getElementById('close-popup');
 
-		editProfilePictureBtn.addEventListener('click', function(event) {
-			event.preventDefault();
+		editProfilePictureBtn.addEventListener('click', function() {
 			popup.style.display = 'block';
 		});
 
@@ -122,37 +120,6 @@
 			popup.style.display = 'none';
 		});
 	</script>
-
-
-	<script>
-		// Asal Instansi
-		const dropdownMenu = document.querySelector('.dropdown-menu');
-		const searchInput = document.getElementById('id_search');
-		const hiddenInput = document.getElementById('id_prodi');
-
-		searchInput.oninput = function() {
-			const filter = searchInput.value.toLowerCase();
-			const options = dropdownMenu.querySelectorAll('.dropdown-item');
-			for (let i = 0; i < options.length; i++) {
-				const optionText = options[i].text.toLowerCase();
-				if (optionText.indexOf(filter) > -1) {
-					options[i].style.display = "";
-				} else {
-					options[i].style.display = "none";
-				}
-			}
-		};
-
-		dropdownMenu.addEventListener('click', function(event) {
-			event.preventDefault();
-			const clickedOption = event.target;
-			const value = clickedOption.dataset.value;
-			const text = clickedOption.text;
-			hiddenInput.value = value;
-			searchInput.value = text;
-		});
-	</script>
-
 </body>
 
 </html>

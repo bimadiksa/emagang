@@ -24,7 +24,7 @@
 					<button type="button" onclick="location.href='<?= base_url('/') ?>'">Beranda</button>
 			</div>
 		</div>
-		<div class="login-form text-sm-start">
+		<div class="login-form ">
 			<div class="textlogin">
 				<h2>Buat Akun E-MAGANG</h2>
 			</div>

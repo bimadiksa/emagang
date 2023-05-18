@@ -180,6 +180,7 @@ class LoginController extends BaseController
                         'no_id' => $data['no_id'],
                         'email' => $data['email'],
                         'status_magang' => $data['status_magang'],
+                        'kode_instansi_dinas' => $data['kode_instansi_dinas'],
                         'isLoggedIn' => TRUE
                     ];
                     $this->session->set($ses_data);

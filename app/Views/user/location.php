@@ -15,12 +15,22 @@
   <!-- navbar -->
   <nav class="navbar fixed-top navbar-sticky">
     <div class="container">
-      <a class="navbar-brand" href="#" style="color: #7227FE"> <img src="<?= base_url('assets/logo2.png') ?>" alt="Logo" height="30"> E-MAGANG</a>
-      <div class="profile">
+      <a class="navbar-brand" href="<?= base_url('user/dashboard_magang') ?>" style="color: #7227FE">
+        <i class="bi bi-arrow-left"></i>
+        <img src="<?= base_url('assets/logo2.png') ?>" alt="Logo" height="30"> E-MAGANG</a>
+      <div class="profile" <?php
+                            $session = \Config\Services::session();
+                            $kode_instansi_dinas = $session->get('kode_instansi_dinas');
+                            if ($kode_instansi_dinas !== null) {
+                              $url = base_url('user/profil_magang/' . session('id_magang'));
+                            } else {
+                              $url = "";
+                            }
+                            ?> onclick="location.href='<?= $url ?>'">
         <img src="<?= base_url('assets/user.png') ?>" alt="Gambar Profil">
         <div class="profile-info">
-          <p>Nama Lengkap</p>
-          <p class="email">email@contoh.com</p>
+          <p><?= session('nama') ?></p>
+          <p class="email"><?= session('email') ?></p>
         </div>
       </div>
     </div>
@@ -34,103 +44,49 @@
         <h3>Pilih Lokasi Magang</h3>
       </div>
       <div class="search-container">
-        <form action="#">
+        <input type="text" placeholder="Cari..." id="searchInput">
+        <!-- <form action="#">
           <input type="text" placeholder="Cari...">
           <button type="submit"><i class="bi bi-search"></i></button>
-        </form>
+        </form> -->
       </div>
       <div class="d-sm-flex align-items-center justify-content-between py-4">
         <div>
           <p class="judul my-3" style="color: #fff;">Tujuan E-MAGANG</p>
           <p class="deskripsi" style="color: #fff;">E-Magang adalah layanan untuk menunjang sistem administrasi magang di lingkup Pemkab Buleleng Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repellat iusto corrupti repellendus dolore quos expedita perferendis nam magni, quaerat sint..</p>
         </div>
+
         <a href="">
-          <img class="gambarungu img-fluid" src="<?= base_url('assets/lokasi.png') ?>" alt="Logo" height="100" width="900">
+          <img class="gambarungu img-fluid" src="<?php echo base_url('assets/lokasi.png') ?>" alt="Logo" height="100" width="900">
         </a>
       </div>
+
     </div>
   </section>
   <!-- Akhir section hero -->
 
   <!-- Card -->
   <div class="card-container">
-    <div class="card">
-      <img src="<?= base_url('assets/location.jpg') ?>" alt="Gambar 1">
-      <div class="card-content">
-        <h3>Dinas Komunikasi, Informatika, Persandian dan Statistik</h3>
-        <p>Deskripsi Card 1</p>
-        <a href="<?= base_url('user/detail') ?>"><button class="btncard">Lihat Detail</button></a>
-      </div>
-    </div>
-    <div class="card">
-      <img src="<?= base_url('assets/location.jpg') ?>" alt="Gambar 2">
-      <div class="card-content">
-        <h3>Dinas Komunikasi, Informatika, Persandian dan Statistik</h3>
-        <p>Deskripsi Card 2</p>
-        <button class="btncard">Lihat Detail</button>
-      </div>
-    </div>
-    <div class="card">
-      <img src="<?= base_url('assets/location.jpg') ?>" alt="Gambar 3">
-      <div class="card-content">
-        <h3>Dinas Komunikasi, Informatika, Persandian dan Statistik</h3>
-        <p>Deskripsi Card 3</p>
-        <button class="btncard">Lihat Detail</button>
-      </div>
-    </div>
-  </div>
+    <?php
 
-  <div class="card-container">
-    <div class="card">
-      <img src="<?= base_url('assets/location.jpg') ?>" alt="Gambar 1">
-      <div class="card-content">
-        <h3>Dinas Komunikasi, Informatika, Persandian dan Statistik</h3>
-        <p>Deskripsi Card 1</p>
-        <button class="btncard">Lihat Detail</button>
-      </div>
-    </div>
-    <div class="card">
-      <img src="<?= base_url('assets/location.jpg') ?>" alt="Gambar 2">
-      <div class="card-content">
-        <h3>Dinas Komunikasi, Informatika, Persandian dan Statistik</h3>
-        <p>Deskripsi Card 2</p>
-        <button class="btncard">Lihat Detail</button>
-      </div>
-    </div>
-    <div class="card">
-      <img src="<?= base_url('assets/location.jpg') ?>" alt="Gambar 3">
-      <div class="card-content">
-        <h3>Dinas Komunikasi, Informatika, Persandian dan Statistik</h3>
-        <p>Deskripsi Card 3</p>
-        <button class="btncard">Lihat Detail</button>
-      </div>
-    </div>
-  </div>
+    foreach ($output as $row) :
+    ?>
+      <div class="card">
+        <?php
+        foreach ($deskripsiFoto as $rowDeskripsiFoto) :
+          if ($row['kode_instansi'] == $rowDeskripsiFoto['kode_instansi']) :
+        ?>
+            <img src="<?php echo base_url('images/' . $rowDeskripsiFoto['foto_instansi']); ?>" alt="Gambar 1">
 
-  <div class="card-container">
-    <div class="card">
-      <img src="<?= base_url('assets/location.jpg') ?>" alt="Gambar 1">
-      <div class="card-content">
-        <h3>Dinas Komunikasi, Informatika, Persandian dan Statistik</h3>
-        <p>Deskripsi Card 1</p>
-        <button class="btncard">Lihat Detail</button>
+        <?php endif;
+        endforeach; ?>
+        <div class="card-content">
+          <h3><?= $row['ket_ukerja']; ?></h3>
+          <!-- <p>Deskripsi Card 1</p> -->
+          <a href="<?= base_url('user/detail/' . $row['kode_instansi']) ?>"><button class="btncard">Lihat Detail</button></a>
+        </div>
       </div>
-    </div>
-    <div class="card">
-      <img src="<?= base_url('assets/location.jpg') ?>" alt="Gambar 2">
-      <div class="card-content">
-        <h3>Dinas Komunikasi, Informatika, Persandian dan Statistik</h3>
-        <p>Deskripsi Card 2</p>
-        <button class="btncard">Lihat Detail</button>
-      </div>
-    </div>
-    <div class="card">
-      <img src="<?= base_url('assets/location.jpg') ?>" alt="Gambar 3">
-      <div class="card-content">
-        <h3>Dinas Komunikasi, Informatika, Persandian dan Statistik</h3>
-        <button class="btncard">Lihat Detail</button>
-      </div>
-    </div>
+    <?php endforeach; ?>
   </div>
 
   <!-- akhir card -->
@@ -138,3 +94,51 @@
 </body>
 
 </html>
+
+<script>
+  // ambil input search dan card-container
+  const searchInput = document.getElementById('searchInput');
+  const cardContainers = document.querySelectorAll('.card-container');
+
+  // fungsi untuk mencari card yang cocok dengan input search
+  const searchCard = () => {
+    const filter = searchInput.value.toLowerCase(); // konversi input search ke lowercase
+    cardContainers.forEach(cardContainer => {
+      const cards = cardContainer.querySelectorAll('.card'); // ambil semua card dalam card-container
+      cards.forEach(card => {
+        const title = card.querySelector('h3').textContent.toLowerCase(); // ambil judul card dan konversi ke lowercase
+        if (title.indexOf(filter) !== -1) { // jika judul card mengandung input search
+          card.style.display = 'flex'; // tampilkan card
+        } else {
+          card.style.display = 'none'; // sembunyikan card
+        }
+      });
+    });
+  };
+
+  // tangkap event input pada input search dan panggil fungsi pencarian
+  searchInput.addEventListener('input', searchCard);
+</script>
+
+<!-- <script>
+  // ambil input search dan card-container
+  const searchInput = document.getElementById('searchInput');
+  const cardContainer = document.querySelector('.card-container');
+
+  // fungsi untuk mencari card yang cocok dengan input search
+  const searchCard = () => {
+    const filter = searchInput.value.toLowerCase(); // konversi input search ke lowercase
+    const cards = cardContainer.querySelectorAll('.card'); // ambil semua card
+    cards.forEach(card => {
+      const title = card.querySelector('h3').textContent.toLowerCase(); // ambil judul card dan konversi ke lowercase
+      if (title.indexOf(filter) !== 1) { // jika judul card mengandung input search
+        card.style.display = 'block'; // tampilkan card
+      } else {
+        card.style.display = 'none'; // sembunyikan card
+      }
+    });
+  };
+
+  // tangkap event input pada input search dan panggil fungsi pencarian
+  searchInput.addEventListener('input', searchCard);
+</script> -->

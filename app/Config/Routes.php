@@ -76,7 +76,7 @@ $routes->group('admin', ['filter' => 'authGuard'], function ($routes) {
             $routes->get('tambahAdmin_view', 'Admin\CRUDAdmin::indexTambah');
             // read
             $routes->get('admin_view', 'Admin\CRUDAdmin::read');
-            $routes->get('instansiDinas_view', 'Admin\CRUDAdmin::indexInstansiDinas');
+
             // edit
             $routes->post('edit_admin/(:segment)', 'Admin\CRUDAdmin::update/$1');
             $routes->get('edit_admin/(:segment)', 'Admin\CRUDAdmin::edit/$1');
@@ -99,12 +99,19 @@ $routes->group('admin', ['filter' => 'authGuard'], function ($routes) {
         // delete
         $routes->match(['get', 'post'], 'hapusInstansi/(:segment)', 'Admin\CRUDInstansiAsal::delete/$1');
 
+        //CRUD instansi dinas
+        $routes->get('instansiDinas_view', 'Admin\CRUDInstansiDinas::indexInstansiDinas');
+        $routes->get('edit_instansi_dinas/(:segment)', 'Admin\CRUDInstansiDinas::indexDeskripsi/$1');
+        $routes->post('simpan_data_instansi_dinas/(:segment)', 'Admin\CRUDInstansiDinas::tambahDataInstansiDinas/$1');
+        $routes->get('pilih_instansi/(:segment)', 'Admin\CRUDInstansiDinas::indexDeskripsi/$1');
+
         //CRUD ANAK MAGANG
         //read
         $routes->get('anakMagang_view', 'Admin\CRUDAnakMagang::read');
         //edit
         $routes->get('rubah_status_anak_magang/(:segment)', 'Admin\CRUDAnakMagang::change_status/$1'); //aktif nonaktif
         $routes->get('rubah_status_magang/(:segment)', 'Admin\CRUDAnakMagang::change_status_magang/$1');
+        $routes->get('kembalikan/(:segment)', 'Admin\CRUDAnakMagang::turnBack/$1');
     });
 });
 $routes->group('user', ['filter' => 'authGuard'], function ($routes) {
@@ -115,7 +122,9 @@ $routes->group('user', ['filter' => 'authGuard'], function ($routes) {
     $routes->get('absen', 'User\Absen::index');
     $routes->get('sertif', 'User\Sertif::index');
     $routes->get('location', 'User\Location::index');
-    $routes->get('detail', 'User\Location::indexDetail');
+    $routes->get('kartu', 'User\Kartu::index');
+    $routes->get('detail/(:segment)', 'User\Location::indexDetail/$1');
+    $routes->get('pilih_instansi/(:segment)', 'User\Location::pilih/$1');
 });
 // $routes->get('dashboard_magang', 'User\Dashboard::index');
 

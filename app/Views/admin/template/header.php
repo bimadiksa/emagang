@@ -45,6 +45,7 @@ $uri = uri_string(); ?>
     <!-- Menghubungkan Font Awesome library -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
+
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -62,25 +63,6 @@ $uri = uri_string(); ?>
                 <li class="nav-item">
                     <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
                 </li>
-
-                <!-- <li class="nav-item d-none d-sm-inline-block">
-                    <a href="index3.html" class="nav-link text-white">Home</a>
-                </li>
-                <li class="nav-item d-none d-sm-inline-block">
-                    <a href="#" class="nav-link text-white">Contact</a>
-                </li> -->
-                <!-- <li class="nav-medsos" style="--i:#a955ff;--j:#ea51ff">
-                    <span class="icon"><i class="fab fa-facebook"></i></span>
-                    <span class="titulo">facebook</span>
-                </li>
-                <li class="nav-medsos" style="--i:#56CCF2;--j:#2F80ED">
-                    <span class="icon"><i class="fab fa-twitter"></i></span>
-                    <span class="titulo">twitter</span>
-                </li>
-                <li class="nav-medsos" style="--i:#86be6b;--j:#1baf16">
-                    <span class="icon"><i class="fab fa-whatsapp"></i></span>
-                    <span class="titulo">whatsapp</span>
-                </li> -->
             </ul>
         </nav>
         <!-- /.navbar -->
@@ -151,21 +133,21 @@ $uri = uri_string(); ?>
                                     </p>
                                 </a>
                             </li>
-                            <li class="nav-item">
-                                <a href="<?= base_url('admin/instansiDinas_view') ?>" class="nav-link <?php if ($active_sidebar == 'instansi_dinas') {
-                                                                                                            echo 'active';
-                                                                                                        } ?>">
-                                    <i class="nav-icon fas fa-map-marker-alt"></i>
-
-                                    <p>
-                                        Instansi Dinas
-                                        <!-- <i class="right fas fa-angle-left"></i> -->
-                                    </p>
-                                </a>
-                            </li>
                         <?php else : ?>
                             <!-- .. -->
                         <?php endif; ?>
+                        <li class="nav-item">
+                            <a href="<?= base_url('admin/instansiDinas_view') ?>" class="nav-link <?php if ($active_sidebar == 'instansi_dinas') {
+                                                                                                        echo 'active';
+                                                                                                    } ?>">
+                                <i class="nav-icon fas fa-map-marker-alt"></i>
+
+                                <p>
+                                    Instansi Dinas
+                                    <!-- <i class="right fas fa-angle-left"></i> -->
+                                </p>
+                            </a>
+                        </li>
                         <li class="nav-item">
                             <a href="<?= base_url('admin/instansiAsal_view') ?>" class="nav-link <?php if ($active_sidebar == 'asal_instansi') {
                                                                                                         echo 'active';

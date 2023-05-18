@@ -44,135 +44,127 @@ nav {
 
 /* Konten */
 .konten {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  justify-content: space-between;
+  margin: auto;
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+  background-color: #ebe8f2;
 }
+
 .card {
-  background-color: #722fe7;
-  color: #fff;
-  margin-top: 100px;
-  border: 0;
-  border-radius: 5px;
-  height: 50%;
-  margin-left: 3rem;
-  margin-right: 0 auto;
-}
-.user {
-  width: 90px;
-  height: auto;
-}
-.right {
-  flex: 1;
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin-top: 6rem;
-  background-color: #fff;
+  max-width: 1000px;
+  margin: 20px auto;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  position: relative;
 }
 
-.btnprofile {
-  margin-left: 3rem;
-  padding: 5px;
-  background-color: transparent;
-  border-width: 3px;
-  border-color: black;
+.card img {
+  height: 400px;
+  object-fit: cover;
 }
 
-form {
-  display: flex;
-  min-width: 80%;
-  justify-content: center;
-  flex-direction: column;
+.card h5 {
+  font-weight: bolder;
 }
 
-label {
-  font-weight: bold;
+.card p,
+li {
+  font-weight: 400;
   font-size: 15px;
-  margin-bottom: 5px;
 }
 
-input[id="name"],
-input[id="email"],
-input[id="telp"],
-input[id="alamat"],
-input[id="asal"],
-textarea {
-  padding: 10px;
-  margin-bottom: 30px;
-  border-radius: 4px;
-  border: 0;
-  width: 100%;
-  background-color: #f3f3f3;
-  resize: vertical;
+.card-body {
+  padding: 20px;
 }
 
-input[id="about"],
-textarea {
-  justify-content: center;
-  margin-left: 10px;
-  padding: 10px;
-  margin-bottom: 30px;
-  border-radius: 4px;
-  border: 0;
-  width: 10rem;
-  background-color: #f3f3f3;
+.card-text {
+  font-weight: bold;
+  font-size: 20px;
+  margin-bottom: 10px;
 }
 
-input[id="tgl"],
-textarea {
-  padding: 10px;
-  margin-bottom: 30px;
-  margin-right: 3rem;
-  border-radius: 4px;
-  border: 0;
-  width: 25%;
-  background-color: #f3f3f3;
-  resize: vertical;
+.desc {
+  font-size: 14px;
+  color: #555;
+  line-height: 1.5;
+  margin-bottom: 0;
 }
 
-.input-group {
-  display: flex;
-  align-items: center;
-  margin-bottom: 30px;
-  min-width: 100%;
-}
-
-.options {
-  display: flex;
-  flex-direction: column;
-}
-
-.option {
-  background-color: white;
-  border-radius: 50px;
-  padding: 20px 20px;
-  margin-bottom: 20px;
-  text-align: left;
-}
-
-.option:focus {
-  outline: none;
-  background-color: gray;
-  color: white;
-}
-
-button[type="submit"] {
+.btn-pilih {
   background-color: #7227fe;
   color: white;
   border: none;
   padding: 10px 20px;
-  border-radius: 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin-top: 10px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.btn-kembali {
+  background-color: #999999;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+/* CSS POP UP */
+.popup-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  visibility: hidden;
+}
+
+.popup {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.popup p {
+  margin: 0;
+  font-size: 18px;
+  text-align: center;
+}
+
+.popup-buttons {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.popup-buttons button {
+  margin: 0 10px;
+  padding: 10px 20px;
+  border: none;
+  background-color: #4caf50;
+  color: white;
+  border-radius: 4px;
   cursor: pointer;
 }
 
-button[type="submit"]:hover {
-  background-color: #7538e8;
+.popup-buttons button:hover {
+  background-color: #45a049;
 }
 
-.input-col {
-  margin-left: 10rem;
+.popup-container.show {
+  visibility: visible;
 }

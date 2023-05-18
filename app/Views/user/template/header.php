@@ -9,8 +9,18 @@
     <!-- Mobile Specific Metas -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- sweet alert -->
+    <link rel="stylesheet" href="/plugins/sweetalert2/sweetalert2.min.css">
+    <script src="/plugins/sweetalert2/sweetalert2.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <link rel="stylesheet" type="text/css" href="<?= base_url('path/sweetalert2/sweetalert2.min.css') ?>">
+    <script type="text/javascript" src="<?= base_url('path/sweetalert2/sweetalert2.all.min.js') ?>"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.all.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.min.css" rel="stylesheet">
+    <!-- Menghubungkan Font Awesome library -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
     <!-- CSS -->
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/vendors/styles/core.css') ?>">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/vendors/styles/icon-font.min.css') ?>">
@@ -19,6 +29,22 @@
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/src/plugins/datatables/css/responsive.bootstrap4.min.css') ?>">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/vendors/styles/style.css') ?>">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('style/dashboard.css') ?>">
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-119386393-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-119386393-1');
+    </script>
+
 
 
 
@@ -60,7 +86,7 @@
                         </span>
                         <span class="user-name"><?= session('nama') ?></span>
                     </a>
-                    <div class="dropdown-menu dropdown-menu-end dropdown-menu-dark" aria-labelledby="dropdownMenuButton">
+                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
                         <li><a class="dropdown-item" href="<?= base_url('/login_view'); ?>"><i class="dw dw-user1"></i> Profile</a></li>
                         <li><?php if (session()->get('isLoggedIn')) : ?>
                                 <a class="dropdown-item" href="<?= base_url('/logout'); ?>"><i class="dw dw-logout"></i> Log Out</a>
@@ -103,34 +129,39 @@
         <div class="menu-block customscroll">
             <div class="sidebar-menu">
                 <ul id="accordion-menu">
-                    <li>
-                        <a href="<?= base_url('user/dashboard_magang') ?>" class="dropdown-toggle no-arrow">
-                            <span class="micon dw dw-house-1"></span><span class="mtext">Dashboard</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="<?= base_url('user/profil_magang/' . session('id_magang')) ?>" class="dropdown-toggle no-arrow">
-                            <span class="micon fa fa-user-o"></span><span class="mtext">Profile</span>
-                        </a>
-                    </li>
+                    <?php
+                    $session = \Config\Services::session();
+                    $kode_instansi_dinas = $session->get('kode_instansi_dinas');
+                    if ($kode_instansi_dinas !== null) : ?>
+                        <li>
+                            <a href="<?= base_url('user/dashboard_magang') ?>" class="dropdown-toggle no-arrow">
+                                <span class="micon dw dw-house-1"></span><span class="mtext">Dashboard</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="<?= base_url('user/profil_magang/' . session('id_magang')) ?>" class="dropdown-toggle no-arrow">
+                                <span class="micon fa fa-user-o"></span><span class="mtext">Profile</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="<?= base_url('user/absen') ?>" class="dropdown-toggle no-arrow">
+                                <span class="micon fa fa-pencil-square-o"></span><span class="mtext">Absen</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="<?= base_url('user/jurnal_harian') ?>" class="dropdown-toggle no-arrow">
+                                <span class="micon fa fa-book"></span><span class="mtext">Jurnal Harian</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="<?= base_url('user/sertif') ?>" class="dropdown-toggle no-arrow">
+                                <span class="micon fa fa-print"></span><span class="mtext">Sertifikat</span>
+                            </a>
+                        </li>
+                    <?php endif; ?>
                     <li>
                         <a href="<?= base_url('user/location') ?>" class="dropdown-toggle no-arrow">
                             <span class="micon fa fa-map-marker"></span><span class="mtext">Lokasi Magang</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="<?= base_url('user/absen') ?>" class="dropdown-toggle no-arrow">
-                            <span class="micon fa fa-pencil-square-o"></span><span class="mtext">Absen</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="<?= base_url('user/jurnal_harian') ?>" class="dropdown-toggle no-arrow">
-                            <span class="micon fa fa-book"></span><span class="mtext">Jurnal Harian</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="<?= base_url('user/sertif') ?>" class="dropdown-toggle no-arrow">
-                            <span class="micon fa fa-print"></span><span class="mtext">Sertifikat</span>
                         </a>
                     </li>
                 </ul>

@@ -88,40 +88,6 @@ class AdminModel extends Model
             return false;
         }
     }
-
-    public function getDataFromAPI()
-    {
-        $url = '/api/instansi_utama';
-        $method = 'GET';
-
-        $base_link = 'https://egov.bulelengkab.go.id';
-        $link = $base_link . $url;
-
-        $client_id = 'emagang_buleleng123';
-        $client_secret = '@Emagang2023';
-
-        $auth = base64_encode($client_id . ':' . $client_secret);
-        $headers = array(
-            'Content-Type:multipart/form-data',
-            'Authorization: Basic ' . $auth,
-        );
-
-        $ch = curl_init();
-
-        curl_setopt($ch, CURLOPT_URL, $link);
-        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $method);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-
-        $output = curl_exec($ch);
-        curl_close($ch);
-
-        $output = json_decode($output, TRUE);
-
-
-
-        return $output['data'];
-    }
     // public function getSubInstansiData($kode_instansi)
     // {
     //     $url = '/api/sub_instansi/' . urlencode($kode_instansi);

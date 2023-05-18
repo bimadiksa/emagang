@@ -44,67 +44,165 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php
-                                    $id = 0;
-                                    foreach ($anakMagang as $row) :
-                                        $id++; ?>
-                                        <tr>
-                                            <td><?= $id ?></td>
-                                            <td><?= $row['nama']; ?></td>
-                                            <td><?= $row['no_id']; ?></td>
-                                            <td><span class=" background-text <?php echo $row['status'] == 'aktif' ? 'bg-success' : 'bg-danger'; ?>"><?= $row['status']; ?></span></td>
-                                            <td><span class="background-text <?= $row['status_magang'] == 'nonmagang' ? 'bg-secondary' : ($row['status_magang'] == 'magang' ? 'bg-success' : 'bg-danger'); ?>"><?= $row['status_magang']; ?></span></td>
-                                            <td>
-                                                <a href="#" class="btn btn-outline-info" data-toggle="modal" data-target="#modalDetail<?= $row['id_magang'] ?>"><i class="fas fa-info-circle"></i></a>
-                                                <a href="<?= base_url('admin/rubah_status_anak_magang/' . $row['id_magang']) ?>" class="btn btn-admin float-top-left <?php if ($row['status'] == 'aktif') echo 'btn-outline-secondary';
-                                                                                                                                                                        else echo 'btn-outline-primary' ?>">
-                                                    <i class="fa <?php if ($row['status'] == 'aktif') echo 'fa-ban';
-                                                                    else echo 'fa-unlock' ?>"></i>
-                                                </a>
-                                                <a href="<?= base_url('admin/rubah_status_magang/' . $row['id_magang']) ?>" class="btn btn-admin float-top-left <?php if ($row['status_magang'] == 'nonmagang') echo 'btn-outline-secondary';
-                                                                                                                                                                elseif ($row['status_magang'] == 'magang') echo 'btn-outline-primary';
-                                                                                                                                                                elseif ($row['status_magang'] == 'tamat') echo 'btn-outline-danger'; ?>">
-                                                    <i class="fa <?php if ($row['status_magang'] == 'nonmagang') echo 'fa-user-slash';
-                                                                    elseif ($row['status_magang'] == 'magang') echo 'fa-user-check';
-                                                                    elseif ($row['status_magang'] == 'tamat') echo 'fa-user-times'; ?>"></i>
-                                                </a>
+                                    <?php $session = \Config\Services::session();
+                                    $level = $session->get('level');
+                                    if ($level == 'super_admin') : ?>
+                                        <?php
+                                        $id = 0;
+                                        foreach ($anakMagang as $row) :
+                                            $id++; ?>
+                                            <tr>
+                                                <td><?= $id ?></td>
+                                                <td><?= $row['nama']; ?></td>
+                                                <td><?= $row['no_id']; ?></td>
+                                                <td><span class=" badge <?php echo $row['status'] == 'aktif' ? 'bg-success' : 'bg-danger'; ?>"><?= $row['status']; ?></span></td>
+                                                <td><span class="badge <?= $row['status_magang'] == 'nonmagang' ? 'bg-secondary' : ($row['status_magang'] == 'magang' ? 'bg-success' : 'bg-danger'); ?>"><?= $row['status_magang']; ?></span></td>
+                                                <td>
+                                                    <a href="#" class="btn btn-outline-info" data-toggle="modal" data-target="#modalDetail<?= $row['id_magang'] ?>"><i class="fas fa-info-circle"></i></a>
+                                                    <a href="<?= base_url('admin/rubah_status_anak_magang/' . $row['id_magang']) ?>" class="btn btn-admin float-top-left <?php if ($row['status'] == 'aktif') echo 'btn-outline-secondary';
+                                                                                                                                                                            else echo 'btn-outline-primary' ?>">
+                                                        <i class="fa <?php if ($row['status'] == 'aktif') echo 'fa-ban';
+                                                                        else echo 'fa-unlock' ?>"></i>
+                                                    </a>
+                                                    <a href="<?= base_url('admin/rubah_status_magang/' . $row['id_magang']) ?>" class="btn btn-admin float-top-left <?php if ($row['status_magang'] == 'nonmagang') echo 'btn-outline-secondary';
+                                                                                                                                                                    elseif ($row['status_magang'] == 'magang') echo 'btn-outline-primary';
+                                                                                                                                                                    elseif ($row['status_magang'] == 'tamat') echo 'btn-outline-danger'; ?>">
+                                                        <i class="fa <?php if ($row['status_magang'] == 'nonmagang') echo 'fa-user-slash';
+                                                                        elseif ($row['status_magang'] == 'magang') echo 'fa-user-check';
+                                                                        elseif ($row['status_magang'] == 'tamat') echo 'fa-user-times'; ?>"></i>
+                                                    </a>
+                                                    <a href="<?= base_url('admin/kembalikan/' . $row['id_magang']) ?>" class="btn btn-admin float-top-left <?php if ($row['kode_instansi_dinas'] !== null) echo 'btn-outline-danger';
+                                                                                                                                                            else echo 'btn-outline-secondary disabled'   ?>">
+                                                        <i class="fa <?php if ($row['kode_instansi_dinas'] !== null) echo 'fa-arrow-left';
+                                                                        else echo 'fa-times' ?>"></i>
+                                                    </a>
 
-                                                <!-- <a href="<?= base_url('admin/edit_admin/' . $row['id_magang']) ?>" class="btn btn-admin btn-outline-warning float-top"><i class="fas fa-edit"></i></a> -->
-                                                <a href="<?= base_url('admin/hapus_anak_magang/' . $row['id_magang']) ?>" class="btn btn-admin btn-outline-danger float-top-right" onclick="event.preventDefault(); hapusAnakMagang('<?= $row['id_magang'] ?>');"><i class="fas fa-trash-alt"></i></a>
-
-
-                                            </td>
-                                        </tr>
-                                        <!-- Modal detail instansi anak magang -->
-                                        <div class="modal fade" id="modalDetail<?= $row['id_magang'] ?>" tabindex="-1" role="dialog" aria-labelledby="modalDetailLabel<?= $row['id_magang'] ?>" aria-hidden="true">
-                                            <div class="modal-dialog" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="modalDetailLabel<?= $row['id_magang'] ?>">Detail Anak Magang</h5>
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                        </button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <!-- Tampilkan detail instansi anak magang -->
-                                                        <p><strong>Nama Lengkap:</strong>&nbsp;&nbsp;<?= $row['nama'] ?></p>
-                                                        <p><strong>NIM/NISN:</strong>&nbsp;&nbsp;<?= $row['no_id'] ?></p>
-                                                        <p><strong>No HP:</strong>&nbsp;&nbsp;<?= $row['no_hp'] ?></p>
-                                                        <p><strong>Alamat:</strong>&nbsp;&nbsp;<?= $row['alamat'] ?></p>
-                                                        <p><strong>Program Studi:</strong>&nbsp;&nbsp;<?= $row['nama_prodi'] ?></p>
-                                                        <p><strong>Jurusan:</strong>&nbsp;&nbsp;<?= $row['nama_jurusan'] ?></p>
-                                                        <p><strong>Instansi:</strong>&nbsp;&nbsp;<?= $row['nama_instansi'] ?></p>
+                                                    <!-- <a href="<?= base_url('admin/edit_admin/' . $row['id_magang']) ?>" class="btn btn-admin btn-outline-warning float-top"><i class="fas fa-edit"></i></a> -->
+                                                    <a href="<?= base_url('admin/hapus_anak_magang/' . $row['id_magang']) ?>" class="btn btn-admin btn-outline-danger float-top-right" onclick="event.preventDefault(); hapusAnakMagang('<?= $row['id_magang'] ?>');"><i class="fas fa-trash-alt"></i></a>
 
 
-                                                        <!-- Tambahkan informasi detail instansi lainnya sesuai kebutuhan -->
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                                                </td>
+                                            </tr>
+                                            <!-- Modal detail instansi anak magang -->
+                                            <div class="modal fade" id="modalDetail<?= $row['id_magang'] ?>" tabindex="-1" role="dialog" aria-labelledby="modalDetailLabel<?= $row['id_magang'] ?>" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="modalDetailLabel<?= $row['id_magang'] ?>">Detail Anak Magang</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <!-- Tampilkan detail instansi anak magang -->
+                                                            <p><strong>Nama Lengkap:</strong>&nbsp;&nbsp;<?= $row['nama'] ?></p>
+                                                            <p><strong>NIM/NISN:</strong>&nbsp;&nbsp;<?= $row['no_id'] ?></p>
+                                                            <p><strong>No HP:</strong>&nbsp;&nbsp;<?= $row['no_hp'] ?></p>
+                                                            <p><strong>Alamat:</strong>&nbsp;&nbsp;<?= $row['alamat'] ?></p>
+                                                            <p><strong>Program Studi:</strong>&nbsp;&nbsp;<?= $row['nama_prodi'] ?></p>
+                                                            <p><strong>Jurusan:</strong>&nbsp;&nbsp;<?= $row['nama_jurusan'] ?></p>
+                                                            <p><strong>Instansi Asal:</strong>&nbsp;&nbsp;<?= $row['nama_instansi'] ?></p>
+                                                            <?php
+                                                            foreach ($output as $instansi) :
+                                                                if ($row['kode_instansi_dinas'] !== null) :
+                                                                    if ($instansi['kode_instansi'] == $row['kode_instansi_dinas']) : ?>
+                                                                        <p><strong>Tempat Magang:</strong>&nbsp;<?= $instansi['ket_ukerja'] ?></p>
+                                                            <?php endif;
+                                                                endif;
+                                                            endforeach; ?>
+
+
+
+
+                                                            <!-- Tambahkan informasi detail instansi lainnya sesuai kebutuhan -->
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    <?php endforeach; ?>
+                                        <?php endforeach; ?>
+                                        <?php elseif ($level == 'admin') :
+                                        $adminKodeInstansi = $session->get('kode_instansi_dinas');
+                                        $id = 0;
+                                        foreach ($anakMagang as $row) :
+                                            $id++;
+                                            if ($row['kode_instansi_dinas'] == $adminKodeInstansi) : ?>
+                                                <tr>
+                                                    <td><?= $id ?></td>
+                                                    <td><?= $row['nama']; ?></td>
+                                                    <td><?= $row['no_id']; ?></td>
+                                                    <td><span class=" badge <?php echo $row['status'] == 'aktif' ? 'bg-success' : 'bg-danger'; ?>"><?= $row['status']; ?></span></td>
+                                                    <td><span class="badge <?= $row['status_magang'] == 'nonmagang' ? 'bg-secondary' : ($row['status_magang'] == 'magang' ? 'bg-success' : 'bg-danger'); ?>"><?= $row['status_magang']; ?></span></td>
+                                                    <td>
+                                                        <a href="#" class="btn btn-outline-info" data-toggle="modal" data-target="#modalDetail<?= $row['id_magang'] ?>"><i class="fas fa-info-circle"></i></a>
+                                                        <a href="<?= base_url('admin/rubah_status_anak_magang/' . $row['id_magang']) ?>" class="btn btn-admin float-top-left <?php if ($row['status'] == 'aktif') echo 'btn-outline-secondary';
+                                                                                                                                                                                else echo 'btn-outline-primary' ?>">
+                                                            <i class="fa <?php if ($row['status'] == 'aktif') echo 'fa-ban';
+                                                                            else echo 'fa-unlock' ?>"></i>
+                                                        </a>
+                                                        <a href="<?= base_url('admin/rubah_status_magang/' . $row['id_magang']) ?>" class="btn btn-admin float-top-left <?php if ($row['status_magang'] == 'nonmagang') echo 'btn-outline-secondary';
+                                                                                                                                                                        elseif ($row['status_magang'] == 'magang') echo 'btn-outline-primary';
+                                                                                                                                                                        elseif ($row['status_magang'] == 'tamat') echo 'btn-outline-danger'; ?>">
+                                                            <i class="fa <?php if ($row['status_magang'] == 'nonmagang') echo 'fa-user-slash';
+                                                                            elseif ($row['status_magang'] == 'magang') echo 'fa-user-check';
+                                                                            elseif ($row['status_magang'] == 'tamat') echo 'fa-user-times'; ?>"></i>
+                                                        </a>
+                                                        <a href="<?= base_url('admin/kembalikan/' . $row['id_magang']) ?>" class="btn btn-admin float-top-left <?php if ($row['kode_instansi_dinas'] !== null) echo 'btn-outline-danger';
+                                                                                                                                                                else echo 'btn-outline-secondary disabled'   ?>">
+                                                            <i class="fa <?php if ($row['kode_instansi_dinas'] !== null) echo 'fa-arrow-left';
+                                                                            else echo 'fa-times' ?>"></i>
+                                                        </a>
+
+                                                        <!-- <a href="<?= base_url('admin/edit_admin/' . $row['id_magang']) ?>" class="btn btn-admin btn-outline-warning float-top"><i class="fas fa-edit"></i></a> -->
+                                                        <a href="<?= base_url('admin/hapus_anak_magang/' . $row['id_magang']) ?>" class="btn btn-admin btn-outline-danger float-top-right" onclick="event.preventDefault(); hapusAnakMagang('<?= $row['id_magang'] ?>');"><i class="fas fa-trash-alt"></i></a>
+
+
+                                                    </td>
+                                                </tr>
+                                                <!-- Modal detail instansi anak magang -->
+                                                <div class="modal fade" id="modalDetail<?= $row['id_magang'] ?>" tabindex="-1" role="dialog" aria-labelledby="modalDetailLabel<?= $row['id_magang'] ?>" aria-hidden="true">
+                                                    <div class="modal-dialog" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="modalDetailLabel<?= $row['id_magang'] ?>">Detail Anak Magang</h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <!-- Tampilkan detail instansi anak magang -->
+                                                                <p><strong>Nama Lengkap:</strong>&nbsp;&nbsp;<?= $row['nama'] ?></p>
+                                                                <p><strong>NIM/NISN:</strong>&nbsp;&nbsp;<?= $row['no_id'] ?></p>
+                                                                <p><strong>No HP:</strong>&nbsp;&nbsp;<?= $row['no_hp'] ?></p>
+                                                                <p><strong>Alamat:</strong>&nbsp;&nbsp;<?= $row['alamat'] ?></p>
+                                                                <p><strong>Program Studi:</strong>&nbsp;&nbsp;<?= $row['nama_prodi'] ?></p>
+                                                                <p><strong>Jurusan:</strong>&nbsp;&nbsp;<?= $row['nama_jurusan'] ?></p>
+                                                                <p><strong>Instansi Asal:</strong>&nbsp;&nbsp;<?= $row['nama_instansi'] ?></p>
+                                                                <?php
+                                                                foreach ($output as $instansi) :
+                                                                    if ($row['kode_instansi_dinas'] !== null) :
+                                                                        if ($instansi['kode_instansi'] == $row['kode_instansi_dinas']) : ?>
+                                                                            <p><strong>Tempat Magang:</strong>&nbsp;<?= $instansi['ket_ukerja'] ?></p>
+                                                                <?php endif;
+                                                                    endif;
+                                                                endforeach; ?>
+
+
+
+
+                                                                <!-- Tambahkan informasi detail instansi lainnya sesuai kebutuhan -->
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                        <?php endif;
+                                        endforeach; ?>
+                                    <?php endif; ?>
                                 </tbody>
                                 <!-- <tfoot>
                                     <tr>
@@ -164,6 +262,7 @@
         justify-content: space-between;
     }
 </style>
+
 
 <!-- Script untuk mengirim permintaan AJAX ke controller -->
 <script>

@@ -10,6 +10,7 @@ use CodeIgniter\HTTP\ResponseInterface;
 use Psr\Log\LoggerInterface;
 use App\Models\AdminModel;
 use App\Models\InstansiModel;
+use App\Models\InstansiDinasModel;
 use App\Models\JurusanModel;
 use App\Models\ProdiModel;
 use App\Models\AnakMagangModel;
@@ -31,6 +32,7 @@ abstract class BaseController extends Controller
 {
     protected $adminModel;
     protected $instansiModel;
+    protected $instansiDinasModel;
     protected $jurusanModel;
     protected $prodiModel;
     protected $anakMagangModel;
@@ -73,6 +75,7 @@ abstract class BaseController extends Controller
         // Preload any models, libraries, etc, here.
         $this->adminModel = new AdminModel();
         $this->instansiModel = new InstansiModel();
+        $this->instansiDinasModel = new InstansiDinasModel();
         $this->jurusanModel = new JurusanModel();
         $this->prodiModel = new ProdiModel();
         $this->anakMagangModel = new AnakMagangModel();

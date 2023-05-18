@@ -16,6 +16,16 @@ class CRUDAnakMagang extends BaseController
         $data['active_sidebar'] = 'anakmagang';
         // $data['instansi'] = $this->instansiModel->getInstansiJoin();
         $data['anakMagang'] = $this->anakMagangModel->getAnakMagangJoin();
+        $data['output'] = $this->instansiDinasModel->getDataFromAPI();
+        foreach ($data['output'] as $instansi) {
+            foreach ($data['anakMagang'] as $anakMagang) {
+                if ($anakMagang['kode_instansi_dinas'] !== null) {
+                    if ($instansi['kode_instansi'] == $anakMagang['kode_instansi_dinas']) {
+                        $data['nama_instansi'] = $instansi['ket_ukerja'];
+                    }
+                }
+            }
+        }
         //dd($data);
 
 
@@ -68,5 +78,22 @@ class CRUDAnakMagang extends BaseController
         $this->anakMagangModel->update($id_magang, ['status_magang' => $status_magang]);
         // Redirect kembali ke halaman sebelumnya
         return redirect()->back()->with('success', 'Status berhasil  di update');
+    }
+
+    public function turnBack($id_magang)
+    {
+        // Ambil data dari database berdasarkan ID
+        // dd($id_magang);
+        $data = $this->anakMagangModel->find($id_magang);
+        // Jika data tidak ditemukan, tampilkan halaman error 404
+        // if (!$data) return $this->show_404();
+        $kode = [
+            'kode_instansi_dinas' => null,
+        ];
+
+        // Update data di database
+        $this->anakMagangModel->update($id_magang, $kode);
+        // Redirect kembali ke halaman sebelumnya
+        return redirect()->back()->with('success', 'BERHASIL DIUBAH. Anak magang telah dikembalikan karena memilih tempat magang yang salah');
     }
 }

@@ -14,7 +14,8 @@ class Dashboard extends BaseController
         $data['active_sidebar'] = 'dashboard';
         // $data['instansi'] = $this->instansiModel->getInstansiJoin();
         $data['anakMagang'] = $this->anakMagangModel->getAnakMagangJoin();
-        //dd($data);
+        // $cek = session('kode_instansi_dinas');
+        // dd($cek);
         return view('/user/dashboard', $data);
     }
 }

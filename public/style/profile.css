@@ -1,32 +1,4 @@
-body {
-  font-family: "Poppins", sans-serif;
-  background-color: #f1f1f1;
-  margin: 0;
-  padding: 0;
-}
-
-.container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  height: 100vh;
-}
-
-.left {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding-left: 55px;
-  padding-right: 55px;
-  padding-bottom: 300px;
-  margin-right: 20px;
-  background-color: #7227fe;
-  margin: 0 auto;
-}
-
-* POP UP */
+/* POP UP */
 #popup {
   display: none;
   position: fixed;
@@ -82,138 +54,168 @@ body {
 }
 /* AKHIR POP UP */
 
+.container-fluid {
+  padding: 0;
+  min-height: fit-content;
+}
+
+.row {
+  display: flex;
+}
+
+.col-md-4 {
+  margin: 0;
+  padding: 3rem;
+}
+
+.col-md-8 {
+  margin: 0;
+  padding: 3rem;
+  justify-content: center;
+}
+
+.bg-purple {
+  background-color: #7227ee;
+  color: #fff;
+}
+
+.bg-light {
+  background-color: #f8f9fa;
+}
+
+.profile {
+  width: 150px;
+  height: 1000vh;
+  margin: 0 auto 20px auto;
+  overflow: hidden;
+  border-radius: 50%;
+}
+
+#profile-picture-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.ganti {
+  text-align: center;
+  margin-top: 20px;
+}
+
 .deskripsi {
   color: white;
   line-height: 2;
   text-align: center;
-  font-size: 12px;
+  font-size: 15px;
   font-weight: bold;
   max-width: 300px;
   margin: 0 auto;
   margin-top: 20px;
 }
 
-.ganti .tombol {
-  cursor: pointer;
-  margin-top: 20px;
-  background-color: transparent;
-  border: 1px solid white;
-  color: #fff;
-  padding: 10px;
-}
-
-.profile img {
-  width: 150px;
-  height: 150px;
-  object-fit: cover;
-  border-radius: 50%;
-}
-
-/* bagian form data diri */
-.right {
-  flex: 1;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  padding-top: 50px;
-  padding-left: 150px;
-  padding-right: 0 auto;
-  padding-bottom: 90px;
-  margin: 0px;
-  background-color: #fff;
-}
-
-form {
-  display: flex;
-  flex-direction: column;
+.form-group {
+  margin-bottom: 20px;
+  padding-left: 2rem;
+  padding-right: 2rem;
 }
 
 label {
   font-weight: bold;
-  font-size: 15px;
-  margin-bottom: 5px;
 }
 
-input[id="name"],
-input[id="email"],
-input[id="telp"],
-input[id="alamat"],
-input[id="asal"],
-textarea {
-  padding: 15px;
-  margin-bottom: 30px;
-  border-radius: 4px;
-  border: 0;
-  width: 600px;
-  background-color: #f3f3f3;
-  resize: vertical;
+input[type="name"],
+input[type="email"],
+input[type="asal"],
+input[type="telp"],
+input[type="alamat"] {
+  width: 100%;
+  height: 40px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ced4da;
+  box-sizing: border-box;
 }
 
-input[id="about"],
-textarea {
-  justify-content: center;
-  margin-left: 10px;
-  padding: 15px;
-  margin-bottom: 30px;
-  border-radius: 4px;
-  border: 0;
-  width: 200px;
-  background-color: #f3f3f3;
-}
-
-input[id="tgl"],
-textarea {
-  padding: 15px;
-  margin-bottom: 30px;
-  margin-right: 40px;
-  border-radius: 4px;
-  border: 0;
-  width: 150px;
-  background-color: #f3f3f3;
-  resize: vertical;
-}
-
-.input-group {
-  display: flex;
-  align-items: center;
-  margin-bottom: 30px;
-}
-
-.options {
-  display: flex;
-  flex-direction: column;
-}
-
-.option {
-  background-color: white;
-  border-radius: 50px;
-  padding: 20px 20px;
-  margin-bottom: 20px;
-  text-align: left;
-}
-
-.option:focus {
+input[type="name"]:focus,
+input[type="email"]:focus,
+input[type="asal"]:focus,
+input[type="asal"]:focus,
+input[type="telp"]:focus,
+input[type="alamat"]:focus {
   outline: none;
-  background-color: gray;
-  color: white;
+  border: 1px solid #7227ee;
 }
 
-button[type="submit"] {
+.form-check-input {
+  margin-right: 10px;
+}
+
+.btn-outline-light {
+  color: #fff;
+  border-color: #fff;
+}
+
+.btn-outline-light:hover {
+  color: #7227ee;
+  background-color: #fff;
+  border-color: #fff;
+}
+
+.btn-primary {
+  background-color: #7227ee;
+  border-color: #7227ee;
+  color: #fff;
+}
+
+.btn-submit {
+  color: var(--bs-white);
   background-color: #7227fe;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 10px;
-  cursor: pointer;
+  border: 0;
+  border-radius: 4px;
+  padding: 10px;
+  margin-top: 2rem;
 }
 
-button[type="submit"]:hover {
-  background-color: #7538e8;
+.btn-primary:hover {
+  background-color: #fff;
+  color: #7227ee;
+  border-color: #7227ee;
+}
+/* Untuk perangkat dengan lebar layar kurang dari atau sama dengan 576px */
+@media (max-width: 576px) {
+  .profile {
+    width: 100px;
+    height: 100px;
+    margin: 20px auto;
+  }
+  .ganti {
+    margin-top: 10px;
+  }
+  .form-group {
+    margin-bottom: 10px;
+  }
 }
 
-.input-col {
-  margin-left: 195px;
+/* Untuk perangkat dengan lebar layar antara 577px dan 768px */
+@media (min-width: 577px) and (max-width: 768px) {
+  .profile {
+    width: 120px;
+    height: 120px;
+    margin: 30px auto;
+  }
+  .ganti {
+    margin-top: 15px;
+  }
+}
+
+/* Untuk perangkat dengan lebar layar lebih dari atau sama dengan 769px */
+@media (min-width: 769px) {
+  .profile {
+    width: 150px;
+    height: 150px;
+    margin: 50px auto;
+  }
+  .ganti {
+    margin-top: 20px;
+  }
 }

@@ -35,10 +35,10 @@
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                        <th style="width: 10%">No</th>
-                                        <th>Nama Admin</th>
-                                        <th>Email Admin</th>
-                                        <th>Instansi Dinas</th>
+                                        <th style="width: 5%">No</th>
+                                        <th style="width: 15%">Nama Admin</th>
+                                        <th style="width: 10%">Email Admin</th>
+                                        <th style="width: 20%">Instansi Dinas</th>
                                         <th>Status</th>
                                         <th>Aksi</th>
                                     </tr>
@@ -59,7 +59,7 @@
                                                         break;
                                                     }
                                                 } ?></td>
-                                            <td><span class=" background-text <?php echo $admin['status'] == 'aktif' ? 'bg-success' : 'bg-danger'; ?>"><?= $admin['status']; ?></span></td>
+                                            <td><span class=" badge <?php echo $admin['status'] == 'aktif' ? 'bg-success' : 'bg-danger'; ?>"><?= $admin['status']; ?></span></td>
                                             <td><a href="<?= base_url('admin/rubah_status/' . $admin['id_admin']) ?>" class="btn btn-admin float-top-left <?php if ($admin['status'] == 'aktif') echo 'btn-outline-secondary';
                                                                                                                                                             else echo 'btn-outline-primary' ?>">
                                                     <i class="fa <?php if ($admin['status'] == 'aktif') echo 'fa-ban';
