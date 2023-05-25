@@ -25,10 +25,12 @@
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/vendors/styles/core.css') ?>">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/vendors/styles/icon-font.min.css') ?>">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.5/dist/sweetalert2.min.css">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/src/plugins/datatables/css/dataTables.bootstrap4.min.css') ?>">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/src/plugins/datatables/css/responsive.bootstrap4.min.css') ?>">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/vendors/styles/style.css') ?>">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('style/dashboard.css') ?>">
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url('style/jurnal.css') ?>">
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
@@ -119,7 +121,7 @@
     <!-- SIDE BAR  -->
     <div class="left-side-bar" style="background-color: #7227FE;">
         <div class="brand-logo">
-            <a href="index.html">
+            <a href="">
                 <p class="font-32 weight-700">E-MAGANG</p>
             </a>
             <div class="close-sidebar" data-toggle="left-sidebar-close">

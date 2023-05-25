@@ -45,6 +45,9 @@
                                 </thead>
                                 <tbody>
                                     <?php
+                                    usort($admins, function ($a, $b) {
+                                        return strtotime($a['created_at']) - strtotime($b['created_at']);
+                                    });
                                     $id = 0;
                                     foreach ($admins as $admin) :
                                         $id++;

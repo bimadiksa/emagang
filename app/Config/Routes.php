@@ -118,7 +118,14 @@ $routes->group('user', ['filter' => 'authGuard'], function ($routes) {
     //user anak magang
     $routes->get('dashboard_magang', 'User\Dashboard::index');
     $routes->get('profil_magang/(:segment)', 'User\Profile::index/$1');
+
+    //jurnal
     $routes->get('jurnal_harian', 'User\Jurnal::index');
+    $routes->post('tambah_jurnal/(:segment)', 'User\Jurnal::tambahJurnal/$1');
+    $routes->post('edit_jurnal/(:segment)', 'User\Jurnal::updateJurnal/$1');
+    $routes->get('hapus_jurnal/(:segment)', 'User\Jurnal::hapusJurnal/$1');
+
+
     $routes->get('absen', 'User\Absen::index');
     $routes->get('sertif', 'User\Sertif::index');
     $routes->get('location', 'User\Location::index');

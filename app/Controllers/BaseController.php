@@ -14,6 +14,7 @@ use App\Models\InstansiDinasModel;
 use App\Models\JurusanModel;
 use App\Models\ProdiModel;
 use App\Models\AnakMagangModel;
+use App\Models\JurnalModel;
 use Ramsey\Uuid\Uuid;
 use CodeIgniter\HTTP\Cookie\CookieFactory;
 
@@ -36,6 +37,7 @@ abstract class BaseController extends Controller
     protected $jurusanModel;
     protected $prodiModel;
     protected $anakMagangModel;
+    protected $jurnalModel;
     protected $session;
     // public function __construct(AdminModel $adminModel)
     // {
@@ -79,6 +81,7 @@ abstract class BaseController extends Controller
         $this->jurusanModel = new JurusanModel();
         $this->prodiModel = new ProdiModel();
         $this->anakMagangModel = new AnakMagangModel();
+        $this->jurnalModel = new jurnalModel();
         $this->session = \Config\Services::session();
         $this->session = session();
         session();

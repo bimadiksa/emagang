@@ -75,7 +75,17 @@ input[type="date"]:focus {
   border-color: #666;
   box-shadow: 0 0 5px rgba(102, 102, 102, 0.5);
 }
-
+input[type="text"] {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  color: #555;
+  outline: none;
+  width: 100%;
+  height: 40px;
+  box-sizing: border-box;
+}
 /* styling for the textarea */
 textarea {
   padding: 10px;
@@ -142,6 +152,13 @@ textarea {
 #preview-image {
   display: block;
   margin: 10px auto;
+}
+
+.btn-jurnal-edit{
+  background-color: #f5ce20;
+}
+.btn-jurnal-hapus{
+  background-color: #fa0000;
 }
 
 /* styling for the submit button */
