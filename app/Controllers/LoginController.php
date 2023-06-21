@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use Ramsey\Uuid\Uuid;
 
 use CodeIgniter\Validation\Validation;
 use CodeIgniter\HTTP\Cookie\Cookie;
@@ -133,11 +134,11 @@ class LoginController extends BaseController
                             // Jika username dan password benar, login berhasil
                             return redirect()->to('admin/dashboard_view')->with('succes', 'Login Berhasil'); //jika ingin multi  level beri kondisi disini
                         } else {
-                            $this->session->setFlashdata('error', ' atau password salah.');
+                            $this->session->setFlashdata('error', 'Email atau password salah.');
                             // Jika login gagal, tambahkan variabel session attempt_count
                             $attempt_count = (int) session()->get('attempt_count') + 1;
                             session()->set('attempt_count', $attempt_count);
-                            $this->session->setFlashdata('errorLogin', 'email atau password salah. Anda memiliki kesempatan ' . ($count - $attempt_count) . ' kali lagi ');
+                            $this->session->setFlashdata('errorLogin', 'Email atau password salah. Anda memiliki kesempatan ' . ($count - $attempt_count) . ' kali lagi ');
                             // Jika percobaan login gagal sudah mencapai 3 kali
                             if ($attempt_count >= 3) {
                                 // set variabel session lockout_time untuk mengunci form login
@@ -153,7 +154,7 @@ class LoginController extends BaseController
                 // Jika login gagal, tambahkan variabel session attempt_count
                 $attempt_count = (int) session()->get('attempt_count') + 1;
                 session()->set('attempt_count', $attempt_count);
-                $this->session->setFlashdata('errorLogin', 'email atau password salah. Anda memiliki kesempatan ' .  ($count - $attempt_count) . ' kali lagi ');
+                $this->session->setFlashdata('errorLogin', 'Email atau password salah. Anda memiliki kesempatan ' .  ($count - $attempt_count) . ' kali lagi ');
                 // Jika percobaan login gagal sudah mencapai 3 kali
                 if ($attempt_count >= 3) {
                     // set variabel session lockout_time untuk mengunci form login
@@ -179,6 +180,7 @@ class LoginController extends BaseController
                         'nama' => $data['nama'],
                         'no_id' => $data['no_id'],
                         'email' => $data['email'],
+                        'foto' => $data['foto'],
                         'status_magang' => $data['status_magang'],
                         'kode_instansi_dinas' => $data['kode_instansi_dinas'],
                         'isLoggedIn' => TRUE
@@ -187,11 +189,11 @@ class LoginController extends BaseController
                     // Jika username dan password benar, login berhasil
                     return redirect()->to('user/dashboard_magang')->with('success', 'Login Berhasil'); //jika ingin multi  level beri kondisi disini
                 } else {
-                    $this->session->setFlashdata('error', 'email atau password salah.');
+                    $this->session->setFlashdata('error', 'Email atau password salah.');
                     // Jika login gagal, tambahkan variabel session attempt_count
                     $attempt_count = (int) session()->get('attempt_count') + 1;
                     session()->set('attempt_count', $attempt_count);
-                    $this->session->setFlashdata('errorLogin', 'email atau password salah. Anda memiliki kesempatan ' . ($count - $attempt_count) . ' kali lagi ');
+                    $this->session->setFlashdata('errorLogin', 'Email atau password salah. Anda memiliki kesempatan ' . ($count - $attempt_count) . ' kali lagi ');
                     // Jika percobaan login gagal sudah mencapai 3 kali
                     if ($attempt_count >= 3) {
                         // set variabel session lockout_time untuk mengunci form login
@@ -201,11 +203,11 @@ class LoginController extends BaseController
                     return redirect()->to('login_view')->withInput();
                 }
             } else {
-                $this->session->setFlashdata('error', 'email atau password salah..');
+                $this->session->setFlashdata('error', 'Email atau password salah..');
                 // Jika login gagal, tambahkan variabel session attempt_count
                 $attempt_count = (int) session()->get('attempt_count') + 1;
                 session()->set('attempt_count', $attempt_count);
-                $this->session->setFlashdata('errorLogin', 'email atau password salah. Anda memiliki kesempatan ' .  ($count - $attempt_count) . ' kali lagi ');
+                $this->session->setFlashdata('errorLogin', 'Email atau password salah. Anda memiliki kesempatan ' .  ($count - $attempt_count) . ' kali lagi ');
                 // Jika percobaan login gagal sudah mencapai 3 kali
                 if ($attempt_count >= 3) {
                     // set variabel session lockout_time untuk mengunci form login
@@ -423,38 +425,20 @@ class LoginController extends BaseController
     {
         // Ambil data dari form
         //$subject['subjek'] = $this->request->getVar('subject');
-        $fromEmail = (string) $this->request->getVar('email');
-        $message = $this->request->getVar('message');
+        $uuid = Uuid::uuid4()->toString();
+        helper(['form']);
 
-        //dd($subject);
-        // Inisialisasi library email
+        $data = [
+            'id_saran' => $uuid,
+            'nama' => $this->request->getVar('name'),
+            'email'    => $this->request->getVar('email'),
+            'deskripsi' => $this->request->getVar('message'),
+            'created_at' => date('Y-m-d H:i:s'), // Menangkap waktu saat data dibuat
+            'updated_at' => null,
 
-        // Konfigurasi email
-        $emailConfig = config('Email');
-        // Inisialisasi library email
-        $email = \Config\Services::email();
-        $email->initialize($emailConfig);
-
-        // Set alamat email pengirim dan penerima
-        //$fromEmail = $emailConfig->$this->request->getVar('email');
-
-        $fromName = $this->request->getVar('name');
-
-        // Set alamat email pengirim dan penerima
-        $email->setTo('emagangkominfosanti@gmail.com');
-        $email->setFrom($fromEmail, $fromName);
-
-        // Set subjek dan isi pesan
-        $email->setSubject($fromEmail);
-        $email->setMessage($message);
-
-        // Kirim email
-        if ($email->send()) {
-            // Email berhasil dikirim
-            return redirect()->back()->with('success', 'Pesan telah berhasil dikirim!');
-        } else {
-            // Email gagal dikirim
-            return redirect()->back()->with('error', 'Terjadi kesalahan saat mengirim pesan. Silakan coba lagi nanti.');
-        }
+        ];
+        // dd($data);
+        $this->saranModel->insert($data);
+        return redirect()->to('/')->with('success', 'Saran anda berhasil terkirim');
     }
 }

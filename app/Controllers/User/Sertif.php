@@ -10,7 +10,10 @@ class Sertif extends BaseController
     {
         // Kode untuk menampilkan halaman dashboard
         helper('uri');
+        $data['title'] = 'Sertifikat';
+        $data['active_sidebar'] = 'sertifikat';
+
         //dd($data);
-        return view('/user/sertif');
+        return view('/user/sertif', $data);
     }
 }

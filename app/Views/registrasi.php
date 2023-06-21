@@ -5,6 +5,9 @@
 	<title>Regiatrasi</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
+	<!-- select2 -->
+	<link rel="stylesheet" href="../../plugins/select2/css/select2.min.css">
+	<link rel="stylesheet" href="../../plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
 	<!-- Font Awesome -->
 	<link rel="stylesheet" href="<?php echo base_url('adminlte/plugins/fontawesome-free/css/all.min.css') ?>">
 	<!-- icheck bootstrap -->
@@ -77,22 +80,18 @@
 					<?php endif ?>
 				</div>
 				<div class="form-group">
-					<label for="id_prodi">Asal Instansi</label>
-					<div class="dropdown">
-						<input type="text" class="form-control dropdown-toggle" id="id_search" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" placeholder="Cari...">
-						<div class="dropdown-menu" aria-labelledby="id_prodi" style="position: absolute; top: 100%; left: 0; max-height: 200px; overflow-y: auto;" onshow="expandContent()">
-							<?php foreach ($instansi as $row) : ?>
-								<option value="<?= $row['id_prodi'] ?>"><?= $row['nama_prodi'] ?></option>
-							<?php endforeach; ?>
-							<?php
-							foreach ($instansi as $row) {
-								echo '<a class="dropdown-item" href="#" data-value="' . $row['id_prodi'] . '">' . $row['nama_prodi'] . ',' . $row['nama_jurusan'] . ',' . $row['nama_instansi'] . '</a>';
-							}
-							?>
-						</div>
-						<input type="hidden" id="id_prodi" name="id_prodi">
-					</div>
+					<label for="id_prodi">Asal Sekolah atau Universitas</label>
+					<select class="form-control select2" style="width: 100%;" id="id_prodi" name="id_prodi">
+						<option selected disabled>Pilih Instansi</option>
+						<?php
+						foreach ($instansi as $row) {
+							echo '<option value="' . $row['id_prodi'] . '">' . $row['nama_prodi'] . ', ' . $row['nama_jurusan'] . ', ' . $row['nama_instansi'] . '</option>';
+						}
+						?>
+					</select>
 				</div>
+
+
 				<label for="password">Kata Sandi</label><br>
 				<div class="input-group mb-3">
 					<input type="password" class="form-control <?= session('errors.password') ? 'is-invalid' : '' ?>" name="password" id="password" placeholder="Password">
@@ -123,14 +122,25 @@
 		</div>
 	</div>
 
-	<style>
-	</style>
+
 	<!-- jQuery -->
 	<script src="<?php echo base_url('adminlte/plugins/jquery/jquery.min.js') ?>"></script>
 	<!-- Bootstrap 4 -->
 	<script src="<?php echo base_url('adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js') ?>"></script>
 	<!-- AdminLTE App -->
 	<script src="<?php echo base_url('adminlte/dist/js/adminlte.min.js') ?>"></script>
+	<!-- Select2 -->
+	<script src="../../plugins/select2/js/select2.full.min.js"></script>
+	<!-- Include required libraries -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+
+	<!-- Initialize select2 plugin -->
+	<script>
+		$(document).ready(function() {
+			$('.select2').select2();
+		});
+	</script>
 </body>
 
 </html>
@@ -186,7 +196,16 @@
 		this.querySelector('i').classList.toggle('fa-eye-slash');
 	});
 </script>
-<script>
+
+<!-- <script>
+	const selectProdi = document.getElementById('select_id_prodi');
+	const inputProdi = document.getElementById('input_id_prodi');
+
+	selectProdi.addEventListener('change', function() {
+		inputProdi.value = selectProdi.value;
+	});
+</script> -->
+<!-- <script>
 	const dropdownMenu = document.querySelector('.dropdown-menu');
 	const searchInput = document.getElementById('id_search');
 	const hiddenInput = document.getElementById('id_prodi');
@@ -212,4 +231,4 @@
 		hiddenInput.value = value;
 		searchInput.value = text;
 	});
-</script>
+</script> -->

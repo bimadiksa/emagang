@@ -82,6 +82,7 @@
                                                     endforeach; ?>
                                                 </td>
                                                 <td><a href="<?= base_url('admin/edit_instansi_dinas/' . $row['kode_instansi']) ?>" class="btn btn-admin btn-outline-warning float-top"><i class="fas fa-edit"></i></a>
+                                                    <a href="<?= base_url('admin/titik_lokasi_instansi_dinas/' . $row['kode_instansi']) ?>" class="btn btn-admin btn-outline-secondary float-top"><i class="fas fa-map-marker-alt"></i></a>
                                                 </td>
 
 
@@ -122,6 +123,7 @@
                                                     endforeach; ?>
                                                 </td>
                                                 <td><a href="<?= base_url('admin/edit_instansi_dinas/' . $row['kode_instansi']) ?>" class="btn btn-admin btn-outline-warning float-top"><i class="fas fa-edit"></i></a>
+                                                    <a href="<?= base_url('admin/titik_lokasi_instansi_dinas/' . $row['kode_instansi']) ?>" class="btn btn-admin btn-outline-secondary float-top"><i class="fas fa-map-marker-alt"></i></a>
                                                 </td>
                                     <?php endif;
                                         endforeach;
@@ -153,13 +155,22 @@
         <!-- /.container-fluid -->
     </section>
     <!-- /.content -->
+    <?php $session = \Config\Services::session();
+    $level = $session->get('level');
+    if ($level == 'super_admin') : ?>
+
+        <?php echo view('admin/template/footer'); ?>
 </div>
+<?php elseif ($level == 'admin') : ?>
+    </div>
+    <?php echo view('admin/template/footer'); ?>
+<?php endif; ?>
 <!-- /.content-wrapper -->
 <div id="myModal" class="modal">
     <span class="close">&times;</span>
     <img class="modal-content" id="img01">
 </div>
-<?php echo view('admin/template/footer'); ?>
+
 
 <!-- style untuk field status -->
 <style>

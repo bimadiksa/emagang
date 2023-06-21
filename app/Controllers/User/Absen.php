@@ -8,9 +8,11 @@ class Absen extends BaseController
 {
     public function index()
     {
+        $data['title'] = 'Absen';
+        $data['active_sidebar'] = 'absen';
         // Kode untuk menampilkan halaman dashboard
         helper('uri');
         //dd($data);
-        return view('/user/absen');
+        return view('/user/absen', $data);
     }
 }

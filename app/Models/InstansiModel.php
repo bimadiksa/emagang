@@ -21,9 +21,9 @@ class InstansiModel extends Model
     public function getInstansi($id_instansi = null)
     {
         if ($id_instansi == null) {
-            return $this->findAll();
+            return $this->where('deleted_at', null)->findAll();
         }
-        return $this->find($id_instansi);
+        return $this->where('deleted_at', null)->find($id_instansi);
     }
     public function getInstansiJoin()
     {
@@ -41,9 +41,10 @@ class InstansiModel extends Model
         $query = $builder->get();
         return $query->getResultArray();
     }
+
     public function countDataInstansi()
     {
-        return $this->countAll();
+        return $this->where('deleted_at', null)->countAllResults();
     }
     // public function getInstansiById($id_instansi)
     // {

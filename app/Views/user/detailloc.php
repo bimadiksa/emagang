@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detail Location</title>
+    <title>Detail Pilih Lokasi</title>
     <!-- sweet alert -->
     <link rel="stylesheet" href="/plugins/sweetalert2/sweetalert2.min.css">
     <script src="/plugins/sweetalert2/sweetalert2.min.js"></script>
@@ -41,7 +41,6 @@
                                         $url = "";
                                     }
                                     ?> onclick="location.href='<?= $url ?>'">
-                <img src="<?= base_url('assets/user.png') ?>" alt="Gambar Profil">
                 <div class="profile-info">
                     <p><?= session('nama') ?></p>
                     <p class="email"><?= session('email') ?></p>
@@ -79,8 +78,15 @@
                 <?php endif; ?>
             </ul>
             <div class="card-body">
-                <a href="<?= base_url('user/pilih_instansi/' . $kode_instansi) ?>" onclick="event.preventDefault(); pilihInstansiDinas();" class="card-link"><button class="btn-pilih">Pilih Tempat Magang</button></a>
-                <a href="<?= base_url('user/location') ?>"><button class="btn-kembali">Kembali</button></a>
+
+
+                <?php if ($kode_instansi_dinas === null) : ?>
+                    <a href="<?= base_url('user/pilih_instansi/' . $kode_instansi) ?>" onclick="event.preventDefault(); pilihInstansiDinas();" class="card-link"><button class="btn-pilih">Pilih Tempat Magang</button></a>
+                    <a href="<?= base_url('user/location') ?>"><button class="btn-kembali">Kembali</button></a>
+                <?php else : ?>
+                    <a href="<?= base_url('user/batal_pilih_instansi/' . $kode_instansi) ?>" onclick="event.preventDefault(); batalPilihInstansiDinas();" class="card-link"><button class="btn-pilih" style="background-color: red;"> Batal Pilih Tempat Magang</button></a>
+                    <a href="<?= base_url('user/location') ?>"><button class="btn-kembali">Kembali</button></a>
+                <?php endif; ?>
             </div>
         </div>
     </div>
@@ -149,6 +155,27 @@
         }).then((result) => {
             if (result.isConfirmed) {
                 window.location.href = "<?= base_url('user/pilih_instansi/' . $kode_instansi) ?>";
+            }
+        })
+    }
+</script>
+
+<script>
+    function batalPilihInstansiDinas() {
+        Swal.fire({
+            title: 'Apakah Yakin?',
+            text: "Anda akan membatalkan tempat magang, pastikan pilihan anda benar!!!",
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            showConfirmButton: true,
+            confirmButtonText: 'Ya, Saya Yakin!',
+            cancelButtonText: 'Saya Tidak Yakin!',
+            reverseButtons: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = "<?= base_url('user/batal_pilih_instansi/' . $kode_instansi) ?>";
             }
         })
     }

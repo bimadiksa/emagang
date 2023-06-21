@@ -28,7 +28,7 @@
                     <!-- jquery validation -->
                     <div class="card card-primary tambah-admin">
                         <div class="card-header" style="background-color: #7227FE;">
-                            <h3 class="card-title">Masukkan email dan password admin. Password menggunakan NIP</h3>
+                            <h3 class="card-title">Membuat Akun Admin</h3>
                         </div>
                         <!-- /.card-header -->
                         <?php if (isset($validation)) : ?>
@@ -64,7 +64,7 @@
                                         <div class="invalid-feedback"><?= session('errors.email') ?></div>
                                     <?php endif ?>
                                 </div>
-                                <div class="form-group">
+                                <!-- <div class="form-group">
                                     <label for="kode_instansi">Instansi Dinas</label>
                                     <div class="dropdown">
                                         <input type="text" class="form-control dropdown-toggle" id="id_search" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" placeholder="Cari...">
@@ -75,6 +75,19 @@
                                                 echo '<a class="dropdown-item" href="#" data-value="' . $row['kode_instansi'] . '">' . $row['ket_ukerja'] . '</a>';
                                             }
                                             ?>
+                                        </div>
+                                        <input type="hidden" id="kode_instansi" name="kode_instansi">
+                                    </div>
+                                </div> -->
+                                <div class="form-group">
+                                    <label for="kode_instansi">Instansi Dinas</label>
+                                    <div class="dropdown">
+                                        <input type="text" class="form-control dropdown-toggle" id="id_search" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" placeholder="Cari...">
+                                        <div class="dropdown-menu" aria-labelledby="kode_instansi" style="position: absolute; top: 100%; left: 0; max-height: 200px; overflow-y: auto;">
+
+                                            <?php foreach ($output as $row) : ?>
+                                                <a class="dropdown-item" href="#" data-value="<?php echo $row['kode_instansi']; ?>" onclick="setValue(this)"><?php echo $row['ket_ukerja']; ?></a>
+                                            <?php endforeach; ?>
                                         </div>
                                         <input type="hidden" id="kode_instansi" name="kode_instansi">
                                     </div>
@@ -157,7 +170,7 @@
 <script>
     const dropdownMenu = document.querySelector('.dropdown-menu');
     const searchInput = document.getElementById('id_search');
-    const hiddenInput = document.getElementById('kode_instansi');
+    const hiddenInput = document.getElementById('id_prodi');
 
     searchInput.oninput = function() {
         const filter = searchInput.value.toLowerCase();
@@ -180,4 +193,12 @@
         hiddenInput.value = value;
         searchInput.value = text;
     });
+</script>
+<script>
+    function setValue(element) {
+        var value = element.getAttribute('data-value');
+        var text = element.textContent.trim();
+        document.getElementById('id_search').value = text;
+        document.getElementById('kode_instansi').value = value;
+    }
 </script>

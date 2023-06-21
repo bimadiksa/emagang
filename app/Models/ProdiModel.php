@@ -21,13 +21,13 @@ class ProdiModel extends Model
     public function getProdi($id_prodi = null)
     {
         if ($id_prodi == null) {
-            return $this->findAll();
+            return $this->where('deleted_at', null)->findAll();
         }
-        return $this->find($id_prodi);
+        return $this->where('deleted_at', null)->find($id_prodi);
     }
     public function countDataProdi()
     {
-        return $this->countAll();
+        return $this->where('deleted_at', null)->countAllResults();
     }
     function getAll()
     {

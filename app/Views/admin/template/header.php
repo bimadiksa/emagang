@@ -37,6 +37,9 @@ $uri = uri_string(); ?>
     <link rel="stylesheet" href="/plugins/sweetalert2/sweetalert2.min.css">
     <script src="/plugins/sweetalert2/sweetalert2.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- pdf -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+
 
     <link rel="stylesheet" type="text/css" href="<?= base_url('path/sweetalert2/sweetalert2.min.css') ?>">
     <script type="text/javascript" src="<?= base_url('path/sweetalert2/sweetalert2.all.min.js') ?>"></script>
@@ -44,8 +47,6 @@ $uri = uri_string(); ?>
     <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.min.css" rel="stylesheet">
     <!-- Menghubungkan Font Awesome library -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-
-
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -62,6 +63,22 @@ $uri = uri_string(); ?>
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+                </li>
+
+            </ul>
+            <ul class="navbar-nav ml-auto">
+
+
+                <li class="nav-item">
+                    <div class="user-panel mt-1 pb-1 mb-1 d-flex">
+
+                        <div class="image">
+                            <img src="<?php echo base_url('assets/user.png') ?>" class="img-circle elevation-2" alt="User Image">
+                        </div>
+                        <div class="info">
+                            <a href="#" class="d-block" style="color: white;"><?= session()->get('username') ?></a>
+                        </div>
+                    </div>
                 </li>
             </ul>
         </nav>
@@ -81,14 +98,7 @@ $uri = uri_string(); ?>
             <!-- Sidebar -->
             <div class="sidebar">
                 <!-- Sidebar user panel (optional) -->
-                <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-                    <div class="image">
-                        <img src="<?php echo base_url('adminlte/dist/img/user2-160x160.jpg') ?>" class="img-circle elevation-2" alt="User Image">
-                    </div>
-                    <div class="info">
-                        <a href="#" class="d-block"><?= session()->get('username') ?></a>
-                    </div>
-                </div>
+
 
                 <!-- SidebarSearch Form -->
                 <!-- <div class="form-inline">
@@ -155,7 +165,7 @@ $uri = uri_string(); ?>
                                 <i class="nav-icon fas fa-building"></i>
 
                                 <p>
-                                    Instansi Anak Magang
+                                    Asal Sekolah atau Universitas Anak Magang
                                     <!-- <i class="right fas fa-angle-left"></i> -->
                                 </p>
                             </a>
@@ -172,13 +182,44 @@ $uri = uri_string(); ?>
                                 </p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="<?= base_url('admin/rekapjurnal') ?>" class="nav-link <?php if ($active_sidebar == 'rekapjurnal') {
+                                                                                                echo 'active';
+                                                                                            } ?>">
+                                <i class="nav-icon far fa-file"></i>
+
+                                <p>
+                                    Rekap Jurnal
+                                    <!-- <i class="right fas fa-angle-left"></i> -->
+                                </p>
+                            </a>
+                        </li>
+                        <?php
+                        $session = \Config\Services::session();
+                        $level = $session->get('level');
+                        if ($level == 'super_admin') : ?>
+                            <li class="nav-item">
+                                <a href="<?= base_url('admin/lihat_saran') ?>" class="nav-link <?php if ($active_sidebar == 'lihat_saran') {
+                                                                                                    echo 'active';
+                                                                                                } ?>">
+                                    <i class="nav-icon fas fa-envelope"></i>
+
+                                    <p>
+                                        Lihat Saran
+                                        <!-- <i class="right fas fa-angle-left"></i> -->
+                                    </p>
+                                </a>
+                            </li>
+                        <?php else : ?>
+                            <!-- .. -->
+                        <?php endif; ?>
                         <li class="nav-item mt-10 logout">
                             <?php if (session()->get('isLoggedIn')) : ?>
                                 <a href="<?= base_url('/logout'); ?>" onclick="event.preventDefault(); logoutConfirmation();" class="nav-link">
                                     <i class="nav-icon fas fa-sign-out-alt"></i>
 
                                     <p>
-                                        Keluar <br> (<?= session()->get('email') ?>)
+                                        Keluar
                                         <!-- <i class="right fas fa-sign-out-alt"></i> -->
                                     </p>
                                 </a>
@@ -191,6 +232,7 @@ $uri = uri_string(); ?>
             </div>
             <!-- /.sidebar -->
         </aside>
+
 
         <style>
             .content_wrapper {

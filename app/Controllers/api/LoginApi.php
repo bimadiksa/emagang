@@ -27,16 +27,17 @@ class LoginApi extends ResourceController
         ];
         return $this->respond($response);
     }
-    public function index()
+    public function datamagang($id_magang)
     {
         $anakMagangModel = new AnakMagangModel();
+        $data = $anakMagangModel->getAnakMagangById($id_magang);
         $response = [
-            'showdata' => $anakMagangModel->showdata(),
-            'status' => 200,
-            'error' => null,
-            'messages' => [
-                'success' => 'Berhasil menampilkan data'
-            ]
+            'data' => $data,
+            // 'statusCode' => 200,
+            // 'error' => null,
+            // 'messages' => [
+            //     'success' => 'Berhasil menampilkan data'
+            // ]
         ];
         return $this->respond($response);
     }
@@ -70,65 +71,90 @@ class LoginApi extends ResourceController
     //     return $this->respond($response);
     // }
 
-    public function csrfToken()
-    {
-        $security = \Config\Services::getCSRFHash();
-        $token = $security;
 
-        return $this->response->setJSON(['csrf_token' => $token]);
-    }
+
+    // public function login()
+    // {
+    //     $email = $this->request->getPost('email');
+    //     $password = $this->request->getPost('password');
+
+    //     $anakMagangModel = new anakMagangModel();
+    //     $user = $anakMagangModel->where('email', $email)->first();
+    //     if ($user) {
+    //         if (password_verify($password, $user['password'])) {
+    //             $data = [
+    //                 'id_magang' => $user['id_magang'],
+    //                 'email' => $user['email']
+    //             ];
+    //             $response = [
+    //                 'status' => 200,
+    //                 'data' => $data,
+    //                 'error' => null,
+    //                 'messages' => "berhasil"
+    //             ];
+    //         } else {
+    //             $response = [
+    //                 'status' => 500,
+    //                 'error' => null,
+    //                 'messages' => "Password salah"
+    //             ];
+    //         }
+    //     } else {
+    //         $response = [
+    //             'status' => 500,
+    //             'error' => null,
+    //             'messages' => "User tidak ditemukan"
+    //         ];
+    //     }
+
+
+
+    //     return $this->respond($response);
+    // }
 
     public function login()
     {
         $email = $this->request->getPost('email');
         $password = $this->request->getPost('password');
 
-        $anakMagangModel = new anakMagangModel();
-        $user = $anakMagangModel->where('email', $email)->first();
-        if ($user) {
-            if (password_verify($password, $user['password'])) {
-                $data = [
-                    'id_magang' => $user['id_magang'],
-                    'email' => $user['email']
-                ];
-                $response = [
-                    'status' => 200,
-                    'data' => $data,
-                    'error' => null,
-                    'messages' => "berhasil"
-                ];
-            } else {
-                $response = [
-                    'status' => 500,
-                    'error' => null,
-                    'messages' => "Password salah"
-                ];
-            }
-        } else {
+        // Mengecek apakah username dan password telah diisi
+        if (empty($email) || empty($password)) {
             $response = [
-                'status' => 500,
-                'error' => null,
-                'messages' => "User tidak ditemukan"
+                'success' => false,
+                'message' => 'Username and password are required fields.',
             ];
+            return $this->respond($response, 400);
         }
 
-        // if (!$user || !password_verify($password, $user['password'])) {
-        //     $response = [
-        //         'status' => 401,
-        //         'error' => 'Email atau password salah',
-        //         'messages' => [
-        //             'error' => 'Autentikasi gagal'
-        //         ]
-        //     ];
-        //     return $this->respond($response);
-        // }
+        // Mencari pengguna berdasarkan username
+        $anakMagangModel = new anakMagangModel();
+        $user = $anakMagangModel->where('email', $email)->first();
 
-        // get the CSRF token
-        // $csrf = csrf_hash();
+        // Memeriksa apakah pengguna ditemukan dan password cocok
+        if ($user && password_verify($password, $user['password'])) {
+            session()->set('id_magang', $user['id_magang']);
+            // Jika cocok, Anda dapat menghasilkan token autentikasi atau mengatur sesi untuk login berhasil
+            $response = [
+                'success' => true,
+                'message' => 'Login successful',
+                'id_magang' => $user['id_magang'],
+            ];
+            return $this->respond($response, 200);
+        } else {
+            // Jika tidak cocok, berikan pesan kesalahan
+            $response = [
+                'success' => false,
+                'message' => 'Invalid username or password',
+            ];
+            return $this->respond($response, 401);
+        }
+    }
 
-
-
-        return $this->respond($response);
+    public function logout()
+    {
+        session_unset();
+        session()->destroy();
+        return $this->respond(['message' => 'Logout successful']);
     }
 
 

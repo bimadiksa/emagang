@@ -12,16 +12,16 @@ class Jurnal extends BaseController
         // Kode untuk menampilkan halaman dashboard
         helper('uri');
         $data['title'] = 'Jurnal Harian';
-        $data['active_sidebar'] = 'jurnal_harian';
+        $data['active_sidebar'] = 'jurnal';
         $data['jurnal'] = $this->jurnalModel->getJurnal();
-        //dd($data);
+        // dd($data);
         return view('/user/jurnal', $data);
     }
 
     public function tambahJurnal($id_magang)
     {
         $data['title'] = 'Jurnal Harian';
-        $data['active_sidebar'] = 'jurnal_harian';
+        $data['active_sidebar'] = 'jurnal';
         $uuid = Uuid::uuid4()->toString();
         $validation =  \Config\Services::validation();
         $validation->setRules([
@@ -75,6 +75,7 @@ class Jurnal extends BaseController
             // ];
             // $this->session->set($ses_jurnal);
             $dokumentasi = $this->request->getFile('dokumentasi');
+            // dd($dokumentasi);
             $dokumentasi->move(ROOTPATH . 'public/jurnal/');
             $nama_dokumentasi = $dokumentasi->getName();
             $data = [

@@ -48,7 +48,7 @@ class RegistrasiController extends BaseController
                     'required' => '{field} harus diisi!!.',
                     'min_length' => '{field} minimal mempunyai {param} karakter.',
                     'max_length' => '{field} miksimal mempunyai {param} karakter.',
-                    'numeric' => 'Terdapat karakter bukan numerik'
+                    'numeric' => 'Terdapat karakter bukan angka'
                 ]
             ],
             'email' => [
@@ -83,13 +83,18 @@ class RegistrasiController extends BaseController
         }
         $email = $this->request->getVar('email');
         $data = $this->adminModel->where('email', $email)->first();
+        $dataUser = $this->anakMagangModel->where('email', $email)->first();
         if ($data) {
             $this->session->setFlashdata('errorRegister', 'Akun email ini sudah terdaftar sebagai admin tidak bisa didaftarkan lagi. Silahkan gunakan akun email lain!!');
             return redirect()->back()->withInput();
         }
+        if ($dataUser) {
+            $this->session->setFlashdata('errorRegister', 'Akun email ini sudah terdaftar sebagai anak magang tidak bisa didaftarkan lagi. Silahkan gunakan akun email lain!!');
+            return redirect()->back()->withInput();
+        }
 
         // $level = $this->request->getPost('level'); // Menangkap data jenis kelamin dari formulir
-        $id_prodi = $this->request->getPost('id_prodi');
+        $id_prodi = $this->request->getVar('id_prodi');
         // Generate kode verifikasi acak
         $verification_code = md5(rand(1, 1000000000));
         $reset_token_expires_at = date('Y-m-d H:i:s', time() + 3600); // Token expires in 1 hour
@@ -99,6 +104,8 @@ class RegistrasiController extends BaseController
             'no_id' => $this->request->getVar('no_id'),
             'email'    => $this->request->getVar('email'),
             'password' => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT),
+            'no_hp' => '-',
+            'alamat' => '-',
             'status'   => 'nonaktif',
             'status_magang'   => 'nonmagang',
             'verification_code' => $verification_code,

@@ -1,164 +1,123 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/vendors/styles/core.css') ?>">
-	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/vendors/styles/icon-font.min.css') ?>">
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
-	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/src/plugins/datatables/css/dataTables.bootstrap4.min.css') ?>">
-	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/src/plugins/datatables/css/responsive.bootstrap4.min.css') ?>">
-	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/vendors/styles/style.css') ?>">
-	<link rel="stylesheet" type="text/css" href="<?php echo base_url('style/sertif.css') ?>">
-	<title>Sertifikat</title>
-</head>
-
-<body>
-	<div class="header">
-		<div class="header-left">
-			<div class="menu-icon dw dw-menu"></div>
-		</div>
-		<div class="header-right">
-			<div class="user-info-dropdown">
-				<div class="dropdown">
-					<a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown">
-						<span class="user-icon">
-							<img src="assets/user.png" alt="">
-						</span>
-						<span class="user-name">Ni Luh Sukma</span>
-					</a>
-					<div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-						<a class="dropdown-item" href="profile.html"><i class="dw dw-user1"></i> Profile</a>
-						<a class="dropdown-item" href="login.html"><i class="dw dw-logout"></i> Log Out</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+<title><?= $title ?></title>
+<?php echo view('user/template/header'); ?>
 
 
-	<!-- SIDE BAR  -->
-	<div class="left-side-bar" style="background-color: #7227FE;">
-		<div class="brand-logo">
-			<a href="index.html">
-				<p class="font-32 weight-700">E-MAGANG</p>
-			</a>
-			<div class="close-sidebar" data-toggle="left-sidebar-close">
-				<i class="ion-close-round"></i>
-			</div>
-		</div>
-		<div class="menu-block customscroll">
-			<div class="sidebar-menu">
-				<ul id="accordion-menu">
-					<li>
-						<a href="<?= base_url('/dashboard') ?>" class="dropdown-toggle no-arrow">
-							<span class="micon dw dw-house-1"></span><span class="mtext">Dashboard</span>
-						</a>
-					</li>
-					<li>
-						<a href="<?= base_url('/profile') ?>" class="dropdown-toggle no-arrow">
-							<span class="micon fa fa-user-o"></span><span class="mtext">Profile</span>
-						</a>
-					</li>
-					<li>
-						<a href="<?= base_url('/location') ?>" class="dropdown-toggle no-arrow">
-							<span class="micon fa fa-map-marker"></span><span class="mtext">Lokasi Magang</span>
-						</a>
-					</li>
-					<li>
-						<a href="<?= base_url('/absen') ?>" class="dropdown-toggle no-arrow">
-							<span class="micon fa fa-pencil-square-o"></span><span class="mtext">Absens</span>
-						</a>
-					</li>
-					<li>
-						<a href="<?= base_url('/jurnal') ?>" class="dropdown-toggle no-arrow">
-							<span class="micon fa fa-book"></span><span class="mtext">Jurnal Harian</span>
-						</a>
-					</li>
-					<li>
-						<a href="<?= base_url('/sertif') ?>" class="dropdown-toggle no-arrow">
-							<span class="micon fa fa-print"></span><span class="mtext">Sertifikat</span>
-						</a>
-					</li>
-				</ul>
-			</div>
-		</div>
-	</div>
-	<div class="mobile-menu-overlay"></div>
 
-	<!-- ISI KONTEN -->
+<div class="content-wrapper">
 	<div class="container">
-		<h1>Sertifikat dan Nilai</h1>
-		<div class="datamentor">
-			<table class="table table-secondary table-sm bordered">
-				<thead>
-					<tr>
-						<th scope="col">Nama Mentor</th>
-						<th scope="col">Aat Rayudha, S.Kom</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td scope="col">No telp</td>
-						<td>08174787973</td>
-					</tr>
-				</tbody>
-			</table>
+		<div class="unduh">
+			<button class="tombolunduhsertif" onclick="saveAsImage()"><i class="bi bi-download"></i> Unduh</button>
 		</div>
-
-		<h4>Akumulasi Nilai Magang</h4>
-		<div class="nilai-magang">
-			<div class="row">
-				<div class="left col-sm-5 col-md-6">
-					<table class="table">
-						<thead>
-							<tr>
-								<th scope="col">Nilai Sikap</th>
-								<th scope="col">Nilai Absen</th>
-								<th scope="col">Nilai Project</th>
-							</tr>
-						</thead>
-						<tbody class="table-group-divider">
-							<tr>
-								<td>80.00</td>
-								<td>80.00</td>
-								<td>80.00</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-				<div class="rigth col-sm-5 offset-sm-2 col-md-6 offset-md-0">
-					<p>Total Nilai</p>
-					<h2>80.00</h2>
-				</div>
+		<div class="sertifikat" style="background-image: url('<?php echo base_url('assets/sertif.png'); ?>')">
+			<div class="judul">
+				<img src="<?php echo base_url('assets/logokab.png') ?>" alt="Logo Instansi" class="logo">
+				<h1>Sertifikat Magang</h1>
+			</div>
+			<div class="konten-sertif">
+				<p class="ok">Di Berikan Kepada</p><br>
+				<p class="bold"><?= session('nama') ?></p><br>
+				<p class="ok">Sebagai</p><br>
+				<p class="bold">Peserta Magang</p><br>
+				<p class="dec">Terima Kasih Atas Dedikasinya, Telah Menyelesaikan Praktek Kerja Lapangan/Industri</p><br>
+				<img src="<?php echo base_url('assets/medal.png') ?>" alt="medal" class="medal">
 			</div>
 		</div>
 
-		<div class="sertif">
-			<div class="row">
-				<div class="left col-sm-5 col-md-6">
-					<p class="textunduh">Unduh Sertifikat Magang</p>
-				</div>
-				<div class=" rigth col-sm-5 offset-sm-2 col-md-6 offset-md-0">
-					<a href=""><button class="tombolunduh"><i class="bi bi-download"></i> Unduh</button></a>
-				</div>
-			</div>
-		</div>
 	</div>
+</div>
+</div>
 
-	<!-- js -->
-	<script src="<?php echo base_url('assets/vendors/scripts/core.js') ?>"></script>
-	<script src="<?php echo base_url('assets/vendors/scripts/script.min.js') ?>"></script>
-	<script src="<?php echo base_url('assets/vendors/scripts/process.js') ?>"></script>
-	<script src="<?php echo base_url('assets/vendors/scripts/layout-settings.js') ?>"></script>
-	<script src="<?php echo base_url('assets/src/plugins/apexcharts/apexcharts.min.js') ?>"></script>
-	<script src="<?php echo base_url('assets/src/plugins/datatables/js/jquery.dataTables.min.js') ?>"></script>
-	<script src="<?php echo base_url('assets/src/plugins/datatables/js/dataTables.bootstrap4.min.js') ?>"></script>
-	<script src="<?php echo base_url('assets/src/plugins/datatables/js/dataTables.responsive.min.js') ?>"></script>
-	<script src="<?php echo base_url('assets/src/plugins/datatables/js/responsive.bootstrap4.min.js') ?>"></script>
-	<script src="<?php echo base_url('assets/vendors/scripts/dashboard.js') ?>"></script>
-</body>
 
-</html>
+<!-- jQuery -->
+<!-- jQuery -->
+<script src="<?php echo base_url('adminlte/plugins/jquery/jquery.min.js') ?>"></script>
+<!-- jQuery UI 1.11.4 -->
+<script src="<?php echo base_url('adminlte/plugins/jquery-ui/jquery-ui.min.js') ?>"></script>
+<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<script>
+	$.widget.bridge('uibutton', $.ui.button)
+</script>
+<!-- Bootstrap 4 -->
+<script src="<?php echo base_url('adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js') ?>"></script>
+<!-- ChartJS -->
+<script src="<?php echo base_url('adminlte/plugins/chart.js/Chart.min.js') ?>"></script>
+<!-- Sparkline -->
+<script src="<?php echo base_url('adminlte/plugins/sparklines/sparkline.js') ?>"></script>
+<!-- JQVMap -->
+<script src="<?php echo base_url('adminlte/plugins/jqvmap/jquery.vmap.min.js') ?>"></script>
+<script src="<?php echo base_url('adminlte/plugins/jqvmap/maps/jquery.vmap.usa.js') ?>"></script>
+<!-- jQuery Knob Chart -->
+<script src="<?php echo base_url('adminlte/plugins/jquery-knob/jquery.knob.min.js') ?>"></script>
+<!-- daterangepicker -->
+<script src="<?php echo base_url('adminlte/plugins/moment/moment.min.js') ?>"></script>
+<script src="<?php echo base_url('adminlte/plugins/daterangepicker/daterangepicker.js') ?>"></script>
+<!-- Tempusdominus Bootstrap 4 -->
+<script src="<?php echo base_url('adminlte/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js') ?>"></script>
+<!-- Summernote -->
+<script src="<?php echo base_url('adminlte/plugins/summernote/summernote-bs4.min.js') ?>"></script>
+<!-- overlayScrollbars -->
+<script src="<?php echo base_url('adminlte/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') ?>"></script>
+<!-- DataTables  & Plugins -->
+<script src="<?php echo base_url('adminlte/plugins/datatables/jquery.dataTables.min.js') ?>"></script>
+<script src="<?php echo base_url('adminlte/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') ?>"></script>
+<script src="<?php echo base_url('adminlte/plugins/datatables-responsive/js/dataTables.responsive.min.js') ?>"></script>
+<script src="<?php echo base_url('adminlte/plugins/datatables-responsive/js/responsive.bootstrap4.min.js') ?>"></script>
+<script src="<?php echo base_url('adminlte/plugins/datatables-buttons/js/dataTables.buttons.min.js') ?>"></script>
+<script src="<?php echo base_url('adminlte/plugins/datatables-buttons/js/buttons.bootstrap4.min.js') ?>"></script>
+<script src="<?php echo base_url('adminlte/plugins/jszip/jszip.min.js') ?>"></script>
+<script src="<?php echo base_url('adminlte/plugins/pdfmake/pdfmake.min.js') ?>"></script>
+<script src="<?php echo base_url('adminlte/plugins/pdfmake/vfs_fonts.js') ?>"></script>
+<script src="<?php echo base_url('adminlte/plugins/datatables-buttons/js/buttons.html5.min.js') ?>"></script>
+<script src="<?php echo base_url('adminlte/plugins/datatables-buttons/js/buttons.print.min.js') ?>"></script>
+<script src="<?php echo base_url('adminlte/plugins/datatables-buttons/js/buttons.colVis.min.js') ?>"></script>
+<!-- AdminLTE App -->
+<script src="<?php echo base_url('adminlte/dist/js/adminlte.js') ?>"></script>
+<!-- AdminLTE for demo purposes -->
+<!-- <script src="<?php echo base_url('adminlte/dist/js/demo.js') ?>"></script> -->
+<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+<script src="<?php echo base_url('adminlte/dist/js/pages/dashboard.js') ?>"></script>
+<!-- sweet alert -->
+<script src="sweetalert2.all.min.js"></script>
+
+<!-- js -->
+<script src="<?php echo base_url('assets/vendors/scripts/core.js') ?>"></script>
+<script src="<?php echo base_url('assets/vendors/scripts/script.min.js') ?>"></script>
+<script src="<?php echo base_url('assets/vendors/scripts/process.js') ?>"></script>
+<script src="<?php echo base_url('assets/vendors/scripts/layout-settings.js') ?>"></script>
+<script src="<?php echo base_url('assets/src/plugins/apexcharts/apexcharts.min.js') ?>"></script>
+<script src="<?php echo base_url('assets/src/plugins/datatables/js/jquery.dataTables.min.js') ?>"></script>
+<script src="<?php echo base_url('assets/src/plugins/datatables/js/dataTables.bootstrap4.min.js') ?>"></script>
+<script src="<?php echo base_url('assets/src/plugins/datatables/js/dataTables.responsive.min.js') ?>"></script>
+<script src="<?php echo base_url('assets/src/plugins/datatables/js/responsive.bootstrap4.min.js') ?>"></script>
+<script src="<?php echo base_url('assets/vendors/scripts/dashboard.js') ?>"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.15.6/dist/sweetalert2.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.5/dist/sweetalert2.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.3/jspdf.umd.min.js"></script>
+<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+
+<script>
+	function saveAsImage() {
+		// Get the card element
+		var element = document.querySelector('.sertifikat');
+
+		// Convert the HTML element to a canvas using html2canvas
+		html2canvas(element).then(function(canvas) {
+			// Convert the canvas to an image using toDataURL
+			var image = canvas.toDataURL('image/jpeg');
+
+			// Create a new link element
+			var link = document.createElement('a');
+
+			// Set the link href attribute to the data URL of the canvas image
+			link.href = image;
+
+			// Set the link download attribute to the desired filename
+			link.download = 'sertifikat_magang.jpg';
+
+			// Trigger a click event on the link element to initiate the download
+			link.click();
+		});
+	}
+</script>

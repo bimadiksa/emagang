@@ -31,7 +31,7 @@
                 $session = \Config\Services::session();
                 $level = $session->get('level');
                 if ($level == 'super_admin') : ?>
-                    <div class="col-lg-3 col-6">
+                    <div class="col-lg-4 col-6">
                         <!-- small box -->
                         <div class="small-box bg-info">
                             <div class="inner">
@@ -50,7 +50,7 @@
                     <!-- .. -->
                 <?php endif; ?>
                 <!-- ./col -->
-                <div class="col-lg-3 col-6">
+                <div class="col-lg-4 col-6">
                     <!-- small box -->
                     <div class="small-box bg-success">
                         <div class="inner">
@@ -62,11 +62,11 @@
                         <div class="icon">
                             <i class="nav-icon fas fa-building"></i>
                         </div>
-                        <a href="<?= base_url('admin/instansiAsal_view') ?>" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        <a href="<?= base_url('admin/instansiAsal_view') ?>" class="small-box-footer">Lebih Lanjut <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
                 <!-- ./col -->
-                <div class="col-lg-3 col-6">
+                <div class="col-lg-4 col-6">
                     <!-- small box -->
                     <div class="small-box bg-warning">
                         <div class="inner">
@@ -75,13 +75,13 @@
                             <h5>Jurusan</h5>
                         </div>
                         <div class="icon">
-                            <i class="ion ion-person-add"></i>
+                            <i class="nav-icon fas fa-building"></i>
                         </div>
-                        <a href="<?= base_url('admin/instansiAsal_view') ?>" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        <a href="<?= base_url('admin/instansiAsal_view') ?>" class="small-box-footer">Lebih Lanjut <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
                 <!-- ./col -->
-                <div class="col-lg-3 col-6" onclick="event.preventDefault(); logoutConfirmation();">
+                <div class="col-lg-4 col-6">
                     <!-- small box -->
                     <div class="small-box bg-danger">
                         <div class="inner">
@@ -90,21 +90,74 @@
                             <h5>Prodi</h5>
                         </div>
                         <div class="icon">
-                            <i class="ion ion-pie-graph"></i>
+                            <i class="nav-icon fas fa-building"></i>
                         </div>
-                        <a href="<?= base_url('admin/instansiAsal_view') ?>" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        <a href="<?= base_url('admin/instansiAsal_view') ?>" class="small-box-footer">Lebih Lanjut <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
+                <?php
+                $session = \Config\Services::session();
+                $level = $session->get('level');
+                if ($level == 'super_admin') : ?>
+                    <div class="col-lg-4 col-6">
+                        <!-- small box -->
+                        <div class="small-box bg-secondary">
+                            <div class="inner">
+                                <h3><strong><?= $countMagang ?></strong></h3>
+
+                                <h5>Anak Magang</h5>
+                            </div>
+                            <div class="icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <a href="<?= base_url('admin/anakMagang_view') ?>" class="small-box-footer">Lebih Lanjut <i class="fas fa-arrow-circle-right"></i></a>
+                        </div>
+                    </div>
+                <?php else : ?>
+                    <div class="col-lg-4 col-6">
+                        <!-- small box -->
+                        <div class="small-box bg-secondary">
+                            <div class="inner">
+                                <h3><strong><?= $countMagangByKodeInstansi ?></strong></h3>
+
+                                <h5>Anak Magang</h5>
+                            </div>
+                            <div class="icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <a href="<?= base_url('admin/anakMagang_view') ?>" class="small-box-footer">Lebih Lanjut <i class="fas fa-arrow-circle-right"></i></a>
+                        </div>
+                    </div>
+                <?php endif; ?>
+
+                <div class="col-lg-4 col-6">
+                    <!-- small box -->
+                    <div class="small-box bg-dark">
+                        <div class="inner">
+                            <h3><strong>40</strong></h3>
+
+                            <h5>Total Instansi Dinas</h5>
+                        </div>
+                        <div class="icon">
+                            <i class="nav-icon fas fa-map-marker-alt"></i>
+                        </div>
+                        <a href="#" class="small-box-footer">-</i></a>
+                    </div>
+                </div>
+
                 <!-- ./col -->
             </div>
             <!-- /.row -->
             <!-- Main row -->
 
+
             <!-- /.row (main row) -->
         </div><!-- /.container-fluid -->
     </section>
     <!-- /.content -->
+
 </div>
+<?php echo view('admin/template/footer'); ?>
 
 <!-- /.content-wrapper -->
 <?php if (session()->get('success')) : ?>
@@ -119,5 +172,3 @@
         });
     </script>
 <?php endif; ?>
-
-<?php echo view('admin/template/footer'); ?>

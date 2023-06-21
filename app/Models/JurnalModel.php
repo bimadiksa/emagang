@@ -16,7 +16,7 @@ class JurnalModel extends Model
     protected $returnType     = 'array';
     protected $useSoftDeletes = true;
 
-    protected $allowedFields = ['id_log_book', 'tanggal_logbook', 'judul', 'deskripsi', 'foto', 'slug', 'created_at', 'updated_at', 'deleted_at', 'id_magang'];
+    protected $allowedFields = ['id_log_book', 'tanggal_logbook', 'judul', 'deskripsi', 'foto', 'slug', 'created_at', 'updated_at', 'deleted_at', 'id_magang', 'kode_instansi_dinas'];
 
     // Dates
     protected $useTimestamps = true;
@@ -33,7 +33,7 @@ class JurnalModel extends Model
     //ambil data instansiDinas
     public function getJurnal()
     {
-        return $this->findAll();
+        return $this->where('deleted_at', null)->findAll();
     }
     // public function getDataFromAPI()
     // {
@@ -80,5 +80,22 @@ class JurnalModel extends Model
             ->where('kode_instansi', $kode_instansi,)
             ->get()
             ->getRowArray();
+    }
+
+    public function showdata()
+    {
+        return $this->db->table('logbook')->where('deleted_at', null)->get()->getResultArray();
+    }
+
+    public function showdataJoin()
+    {
+        $builder = $this->db->table('logbook');
+        $builder->select('*, anak_magang.foto AS anak_magang_foto');
+        $builder->join('anak_magang', 'logbook.id_magang = anak_magang.id_magang');
+        // $builder->join('instansi_dinas', 'anak_magang.kode_instansi_dinas = instansi_dinas.kode_instansi');
+        $builder->where('logbook.deleted_at', null);
+        // $builder->groupBy(' anak_magang.id_magang, logbook.id_magang');
+        $query = $builder->get();
+        return $query->getResultArray();
     }
 }

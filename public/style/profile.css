@@ -1,4 +1,5 @@
 /* POP UP */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
 #popup {
   display: none;
   position: fixed;
@@ -54,28 +55,28 @@
 }
 /* AKHIR POP UP */
 
-.container-fluid {
-  padding: 0;
-  min-height: fit-content;
+
+.isiprofile{
+  display: flex;
+  background-color: #f8f9fa;
+  justify-content: center;
 }
 
-.row {
-  display: flex;
+.row{
+  margin: 20px;
 }
 
 .col-md-4 {
   margin: 0;
-  padding: 3rem;
 }
 
 .col-md-8 {
   margin: 0;
-  padding: 3rem;
   justify-content: center;
 }
 
 .bg-purple {
-  background-color: #7227ee;
+  background-color: #7227fe;
   color: #fff;
 }
 
@@ -83,9 +84,9 @@
   background-color: #f8f9fa;
 }
 
-.profile {
+.profileoke {
   width: 150px;
-  height: 1000vh;
+  height: 150px;
   margin: 0 auto 20px auto;
   overflow: hidden;
   border-radius: 50%;
@@ -97,13 +98,13 @@
   object-fit: cover;
 }
 
-.ganti {
+.gantifotopro {
   text-align: center;
   margin-top: 20px;
 }
 
-.deskripsi {
-  color: white;
+.deskripsipro {
+  color: #7227fe;
   line-height: 2;
   text-align: center;
   font-size: 15px;
@@ -143,7 +144,7 @@ input[type="asal"]:focus,
 input[type="telp"]:focus,
 input[type="alamat"]:focus {
   outline: none;
-  border: 1px solid #7227ee;
+  border: 1px solid #7227fe;
 }
 
 .form-check-input {
@@ -156,14 +157,14 @@ input[type="alamat"]:focus {
 }
 
 .btn-outline-light:hover {
-  color: #7227ee;
+  color: #7227fe;
   background-color: #fff;
   border-color: #fff;
 }
 
 .btn-primary {
-  background-color: #7227ee;
-  border-color: #7227ee;
+  background-color: #7227fe;
+  border-color: #7227fe;
   color: #fff;
 }
 
@@ -175,11 +176,19 @@ input[type="alamat"]:focus {
   padding: 10px;
   margin-top: 2rem;
 }
+.btn-batal {
+  color: var(--bs-white);
+  background-color: #f90c0c;
+  border: 0;
+  border-radius: 4px;
+  padding: 10px;
+  margin-top: 2rem;
+}
 
 .btn-primary:hover {
   background-color: #fff;
-  color: #7227ee;
-  border-color: #7227ee;
+  color: #7227fe;
+  border-color: #7227fe;
 }
 /* Untuk perangkat dengan lebar layar kurang dari atau sama dengan 576px */
 @media (max-width: 576px) {

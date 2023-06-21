@@ -3,244 +3,298 @@
 
 
 <!-- ISI KONTEN -->
-<div class="container">
-	<h1>Tabel Jurnal Harian</h1>
-	<button class="tambah" onclick="showModal()"><i class="bi bi-plus-circle"></i> Tambah Jurnal</button>
-</div>
+<div class="content-wrapper">
+	<div class="containerjurnal">
+		<h1>Tabel Jurnal Harian</h1><br>
+	</div>
 
-<div class="tabeljurnal">
-	<table class="table">
-		<thead>
-			<tr>
-				<th>No</th>
-				<th>Hari Tanggal</th>
-				<th>Judul</th>
-				<th>Isi Jurnal</th>
-				<th>Dokumentasi</th>
-				<th>Aksi</th>
-			</tr>
-		</thead>
-		<?php
-		usort($jurnal, function ($a, $b) {
-			return strtotime($a['created_at']) - strtotime($b['created_at']);
-		});
-		$id = 0;
-		foreach ($jurnal as $row) :
-			$id++; ?>
-			<tr>
-				<td><?= $id ?></td>
-				<td><?= $row['tanggal_logbook'] ?></td>
-				<td><?= $row['judul'] ?></td>
-				<td><?= $row['deskripsi'] ?></td>
-				<td>
-					<img src="<?php echo base_url('jurnal/' . $row['foto']); ?>" alt="Foto" data-image="<?php echo base_url('jurnal/' . $row['foto']); ?>" style=" width: 100px; height: 50px;">
-				</td>
-				<td>
-					<a href="#" class="btn btn-jurnal-edit btn-outline-warning float-top" onclick="editModal('<?= $row['id_log_book'] ?>');"><i class="fas fa-edit"></i></a>
-					<a href="#" class="btn btn-jurnal-hapus btn-outline-danger float-top-right" onclick="event.preventDefault(); hapusJurnal('<?= $row['id_log_book'] ?>');"><i class="fas fa-trash-alt"></i></a>
-				</td>
-			</tr>
-		<?php endforeach; ?>
-		<tbody>
-		</tbody>
-	</table>
-</div>
+	<div class="tabeljurnal">
+		<button class="tambahjurnal" onclick="showModal()"><i class="fas fa-plus"></i> Tambah Jurnal</button>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>No</th>
+					<th>Hari Tanggal</th>
+					<th>Judul</th>
+					<th style="width: 35%;">Isi Jurnal</th>
+					<th>Dokumentasi</th>
+					<th>Aksi</th>
+				</tr>
+			</thead>
 
-<!-- Tampilkan modal tambah -->
-<div class="modal fade" id="modalJurnal" tabindex="-1" role="dialog" aria-labelledby="modalJurnalLabel" aria-hidden="true">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title" id="modalJurnalLabel"><strong>Tambah Jurnal</strong></h5>
+			<tbody>
+				<?php
+				usort($jurnal, function ($a, $b) {
+					return strtotime($a['created_at']) - strtotime($b['created_at']);
+				});
+				$id = 0;
+				foreach ($jurnal as $row) :
+					if ($row['id_magang'] == session('id_magang')) :
+						$id++; ?>
+						<tr>
+							<td><?= $id ?></td>
+							<td><?= $row['tanggal_logbook'] ?></td>
+							<td><?= $row['judul'] ?></td>
+							<td><?= $row['deskripsi'] ?></td>
+							<td>
+								<img src="<?php echo base_url('jurnal/' . $row['foto']); ?>" alt="Foto" data-image="<?php echo base_url('jurnal/' . $row['foto']); ?>" style=" width: 100px; height: 50px;">
+							</td>
+							<td>
+								<a href="#" class="btn btn-jurnal-edit btn-outline-warning float-top" onclick="editModal('<?= $row['id_log_book'] ?>');"><i class="fas fa-edit"></i></a>
+								<a href="#" class="btn btn-jurnal-hapus btn-outline-danger float-top-right" onclick="event.preventDefault(); hapusJurnal('<?= $row['id_log_book'] ?>');"><i class="fas fa-trash-alt"></i></a>
+							</td>
+						</tr>
+				<?php endif;
+				endforeach; ?>
+			</tbody>
+		</table>
+	</div>
 
-			</div>
-			<div class="modal-body">
-				<?php if (isset($errors)) : ?>
-					<div class="alert alert-danger">
-						<?php foreach ($errors as $error) : ?>
-							<p><?= esc($error) ?></p>
-						<?php endforeach ?>
-					</div>
-				<?php endif ?>
-				<form action="<?= base_url('user/tambah_jurnal/' . session('id_magang')) ?>" method="post" enctype="multipart/form-data">
-					<?= csrf_field() ?>
-					<div class="form-group">
-						<label for="haritanggal">Hari dan Tanggal</label>
-						<div class="input-group mb-3">
-							<input type="date" name="haritanggal" class="form-control <?= session('errors.haritanggal') ? 'is-invalid' : '' ?>" id="haritanggal" placeholder="Masukkan password baru">
-							<!-- <div class="input-group-append">
+	<!-- Tampilkan modal tambah -->
+	<div class="modal fade" id="modalJurnal" tabindex="-1" role="dialog" aria-labelledby="modalJurnalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="modalJurnalLabel"><strong>Tambah Jurnal</strong></h5>
+
+				</div>
+				<div class="modal-body">
+					<?php if (isset($errors)) : ?>
+						<div class="alert alert-danger">
+							<?php foreach ($errors as $error) : ?>
+								<p><?= esc($error) ?></p>
+							<?php endforeach ?>
+						</div>
+					<?php endif ?>
+					<form action="<?= base_url('user/tambah_jurnal/' . session('id_magang')) ?>" method="post" enctype="multipart/form-data">
+						<?= csrf_field() ?>
+						<div class="form-group">
+							<label for="haritanggal">Hari dan Tanggal</label>
+							<div class="input-group mb-3">
+								<input type="date" name="haritanggal" class="form-control <?= session('errors.haritanggal') ? 'is-invalid' : '' ?>" id="haritanggal" placeholder="Masukkan password baru">
+								<!-- <div class="input-group-append">
 								<div class="input-group-text">
 									<span class=" show-new-password"><i class="fas fa-lock"></i></span>
 								</div>
 							</div> -->
-							<?php if (session('errors.haritanggal')) : ?>
-								<div class="invalid-feedback"><?= session('errors.haritanggal') ?></div>
-							<?php endif ?>
-						</div>
-						<label for="judul">Judul</label>
-						<div class="input-group mb-3">
-							<input type="text" name="judul" class="form-control <?= session('errors.judul') ? 'is-invalid' : '' ?>" id="judul" placeholder="Konfirmasi judul">
-							<!-- <div class="input-group-append">
-								<div class="input-group-text">
-									<span class=" show-new-confirm-password"><i class="fas fa-lock"></i></span>
-								</div>
-							</div> -->
-							<?php if (session('errors.judul')) : ?>
-								<div class="invalid-feedback"><?= session('errors.judul') ?></div>
-							<?php endif ?>
-						</div>
-						<label for="isijurnal">Deskripsi Jurnal</label>
-						<div class="input-group mb-3">
-							<textarea name="isijurnal" class="form-control <?= session('errors.isijurnal') ? 'is-invalid' : '' ?>" id="isijurnal" placeholder="Masukkan deskripsi"></textarea>
-							<!-- <div class="input-group-append">
-								<div class="input-group-text">
-									<span class=" show-new-confirm-password"><i class="fas fa-lock"></i></span>
-								</div>
-							</div> -->
-							<?php if (session('errors.isijurnal')) : ?>
-								<div class="invalid-feedback"><?= session('errors.isijurnal') ?></div>
-							<?php endif ?>
-						</div>
-						<label for="dokumentasi">Dokumentasi</label>
-						<div class="input-group mb-3">
-							<div class="custom-file">
-								<input type="file" name="dokumentasi" id="dokumentasi" class="custom-file-input <?= session('errors.dokumentasi') ? 'is-invalid' : '' ?>">
-								<label class="custom-file-label" for="dokumentasi">Pilih foto</label>
+								<?php if (session('errors.haritanggal')) : ?>
+									<div class="invalid-feedback"><?= session('errors.haritanggal') ?></div>
+								<?php endif ?>
 							</div>
-							<?php if (session('errors.dokumentasi')) : ?>
-								<div class="invalid-feedback"><?= session('errors.dokumentasi') ?></div>
-							<?php endif ?>
+							<label for="judul">Judul</label>
+							<div class="input-group mb-3">
+								<input type="text" name="judul" class="form-control <?= session('errors.judul') ? 'is-invalid' : '' ?>" id="judul" placeholder="Konfirmasi judul">
+								<!-- <div class="input-group-append">
+								<div class="input-group-text">
+									<span class=" show-new-confirm-password"><i class="fas fa-lock"></i></span>
+								</div>
+							</div> -->
+								<?php if (session('errors.judul')) : ?>
+									<div class="invalid-feedback"><?= session('errors.judul') ?></div>
+								<?php endif ?>
+							</div>
+							<label for="isijurnal">Deskripsi Jurnal</label>
+							<div class="input-group mb-3">
+								<textarea name="isijurnal" class="form-control <?= session('errors.isijurnal') ? 'is-invalid' : '' ?>" id="isijurnal" placeholder="Masukkan deskripsi"></textarea>
+								<!-- <div class="input-group-append">
+								<div class="input-group-text">
+									<span class=" show-new-confirm-password"><i class="fas fa-lock"></i></span>
+								</div>
+							</div> -->
+								<?php if (session('errors.isijurnal')) : ?>
+									<div class="invalid-feedback"><?= session('errors.isijurnal') ?></div>
+								<?php endif ?>
+							</div>
+							<label for="dokumentasi">Dokumentasi</label>
+							<div class="input-group mb-3">
+								<div class="custom-file">
+									<input type="file" name="dokumentasi" id="dokumentasi" class="custom-file-input <?= session('errors.dokumentasi') ? 'is-invalid' : '' ?>">
+									<label class="custom-file-label" for="dokumentasi">Pilih foto</label>
+								</div>
+								<?php if (session('errors.dokumentasi')) : ?>
+									<div class="invalid-feedback"><?= session('errors.dokumentasi') ?></div>
+								<?php endif ?>
+							</div>
+							<div class="tombol" style="padding-top: 20px;">
+								<button type="submit" class="btn btn-primary w-100">Simpan</button>
+							</div>
 						</div>
-						<div class="tombol" style="padding-top: 20px;">
-							<button type="submit" class="btn btn-primary w-100">Simpan</button>
-						</div>
-					</div>
 
 
-				</form>
+					</form>
+				</div>
+
+
 			</div>
-
-
 		</div>
+
 	</div>
 
-</div>
+	<!-- modal edit -->
+	<!-- Tampilkan modal disini -->
+	<div class="modal fade" id="editModalJurnal<?= $row['id_log_book'] ?>" tabindex="-1" role="dialog" aria-labelledby="editModalJurnalLabel<?= $row['id_log_book'] ?>" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="editModalJurnalLabel<?= $row['id_log_book'] ?>"><strong>Tambah Jurnal</strong></h5>
 
-<!-- modal edit -->
-<!-- Tampilkan modal disini -->
-<div class="modal fade" id="editModalJurnal<?= $row['id_log_book'] ?>" tabindex="-1" role="dialog" aria-labelledby="editModalJurnalLabel<?= $row['id_log_book'] ?>" aria-hidden="true">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title" id="editModalJurnalLabel<?= $row['id_log_book'] ?>"><strong>Tambah Jurnal</strong></h5>
-
-			</div>
-			<div class="modal-body">
-				<?php if (isset($errors)) : ?>
-					<div class="alert alert-danger">
-						<?php foreach ($errors as $error) : ?>
-							<p><?= esc($error) ?></p>
-						<?php endforeach ?>
-					</div>
-				<?php endif ?>
-				<form action="<?= base_url('user/edit_jurnal/' . $row['id_log_book']) ?>" method="post" enctype="multipart/form-data">
-					<?= csrf_field() ?>
-					<div class="form-group">
-						<label for="haritanggal">Hari dan Tanggal</label>
-						<div class="input-group mb-3">
-							<input type="date" name="haritanggal" value="<?= $row['tanggal_logbook'] ?>" class="form-control <?= session('errors.haritanggal') ? 'is-invalid' : '' ?>" id="haritanggal" placeholder="Masukkan password baru">
-							<!-- <div class="input-group-append">
+				</div>
+				<div class="modal-body">
+					<?php if (isset($errors)) : ?>
+						<div class="alert alert-danger">
+							<?php foreach ($errors as $error) : ?>
+								<p><?= esc($error) ?></p>
+							<?php endforeach ?>
+						</div>
+					<?php endif ?>
+					<form action="<?= base_url('user/edit_jurnal/' . $row['id_log_book']) ?>" method="post" enctype="multipart/form-data">
+						<?= csrf_field() ?>
+						<div class="form-group">
+							<label for="haritanggal">Hari dan Tanggal</label>
+							<div class="input-group mb-3">
+								<input type="date" name="haritanggal" value="<?= $row['tanggal_logbook'] ?>" class="form-control <?= session('errors.haritanggal') ? 'is-invalid' : '' ?>" id="haritanggal" placeholder="Masukkan password baru">
+								<!-- <div class="input-group-append">
 								<div class="input-group-text">
 									<span class=" show-new-password"><i class="fas fa-lock"></i></span>
 								</div>
 							</div> -->
-							<?php if (session('errors.haritanggal')) : ?>
-								<div class="invalid-feedback"><?= session('errors.haritanggal') ?></div>
-							<?php endif ?>
-						</div>
-						<label for="judul">Judul</label>
-						<div class="input-group mb-3">
-							<input type="text" name="judul" value="<?= $row['judul'] ?>" class="form-control <?= session('errors.judul') ? 'is-invalid' : '' ?>" id="judul" placeholder="Konfirmasi judul">
-							<!-- <div class="input-group-append">
-								<div class="input-group-text">
-									<span class=" show-new-confirm-password"><i class="fas fa-lock"></i></span>
-								</div>
-							</div> -->
-							<?php if (session('errors.judul')) : ?>
-								<div class="invalid-feedback"><?= session('errors.judul') ?></div>
-							<?php endif ?>
-						</div>
-						<label for="isijurnal">Deskripsi Jurnal</label>
-						<div class="input-group mb-3">
-							<textarea name="isijurnal" class="form-control <?= session('errors.isijurnal') ? 'is-invalid' : '' ?>" id="isijurnal" placeholder="Masukkan deskripsi"><?= $row['deskripsi'] ?></textarea>
-							<!-- <div class="input-group-append">
-								<div class="input-group-text">
-									<span class=" show-new-confirm-password"><i class="fas fa-lock"></i></span>
-								</div>
-							</div> -->
-							<?php if (session('errors.isijurnal')) : ?>
-								<div class="invalid-feedback"><?= session('errors.isijurnal') ?></div>
-							<?php endif ?>
-						</div>
-						<label for="dokumentasi">Dokumentasi</label>
-						<div class="input-group mb-3">
-							<div class="custom-file">
-								<input type="file" name="dokumentasi" id="dokumentasi" class="custom-file-input <?= session('errors.dokumentasi') ? 'is-invalid' : '' ?>">
-								<label class="custom-file-label" for="dokumentasi">Pilih foto</label>
+								<?php if (session('errors.haritanggal')) : ?>
+									<div class="invalid-feedback"><?= session('errors.haritanggal') ?></div>
+								<?php endif ?>
 							</div>
-							<?php if (session('errors.dokumentasi')) : ?>
-								<div class="invalid-feedback"><?= session('errors.dokumentasi') ?></div>
-							<?php endif ?>
+							<label for="judul">Judul</label>
+							<div class="input-group mb-3">
+								<input type="text" name="judul" value="<?= $row['judul'] ?>" class="form-control <?= session('errors.judul') ? 'is-invalid' : '' ?>" id="judul" placeholder="Konfirmasi judul">
+								<!-- <div class="input-group-append">
+								<div class="input-group-text">
+									<span class=" show-new-confirm-password"><i class="fas fa-lock"></i></span>
+								</div>
+							</div> -->
+								<?php if (session('errors.judul')) : ?>
+									<div class="invalid-feedback"><?= session('errors.judul') ?></div>
+								<?php endif ?>
+							</div>
+							<label for="isijurnal">Deskripsi Jurnal</label>
+							<div class="input-group mb-3">
+								<textarea name="isijurnal" class="form-control <?= session('errors.isijurnal') ? 'is-invalid' : '' ?>" id="isijurnal" placeholder="Masukkan deskripsi"><?= $row['deskripsi'] ?></textarea>
+								<!-- <div class="input-group-append">
+								<div class="input-group-text">
+									<span class=" show-new-confirm-password"><i class="fas fa-lock"></i></span>
+								</div>
+							</div> -->
+								<?php if (session('errors.isijurnal')) : ?>
+									<div class="invalid-feedback"><?= session('errors.isijurnal') ?></div>
+								<?php endif ?>
+							</div>
+							<label for="dokumentasi">Dokumentasi</label>
+							<div class="input-group mb-3">
+								<div class="custom-file">
+									<input type="file" name="dokumentasi" id="dokumentasi" class="custom-file-input <?= session('errors.dokumentasi') ? 'is-invalid' : '' ?>">
+									<label class="custom-file-label" for="dokumentasi">Pilih foto</label>
+								</div>
+								<?php if (session('errors.dokumentasi')) : ?>
+									<div class="invalid-feedback"><?= session('errors.dokumentasi') ?></div>
+								<?php endif ?>
+							</div>
+							<div class="tombol" style="padding-top: 20px;">
+								<button type="submit" class="btn btn-primary w-100">Simpan</button>
+							</div>
 						</div>
-						<div class="tombol" style="padding-top: 20px;">
-							<button type="submit" class="btn btn-primary w-100">Simpan</button>
-						</div>
-					</div>
 
 
-				</form>
+					</form>
+				</div>
+
+
 			</div>
-
-
 		</div>
+
+	</div>
+	<!-- popup foto -->
+	<div id="myModal" class="modal">
+		<div class="modal-header">
+			<span class="close">&times;</span>
+		</div>
+		<img class="modal-content" id="img01">
 	</div>
 
 </div>
-<!-- popup foto -->
-<div id="myModal" class="modal">
-	<div class="modal-header">
-		<span class="close">&times;</span>
-	</div>
-	<img class="modal-content" id="img01">
-</div>
-
-
 <style>
-	#myModal {
-		max-width: 800px;
-		/* Mengatur lebar maksimum modal */
-		max-height: 800px;
-		/* Mengatur tinggi maksimum modal */
-		/* Tambahan gaya untuk menengahkan modal di layar */
-		position: fixed;
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%, -50%);
-		/* ... tambahkan gaya lainnya yang diperlukan ... */
+	.modal-header {
+		background-color: #EBE8F2;
 	}
 
-	.modal-header {
-		background-color: #7227fe;
+	.modal {
+		display: none;
+		position: fixed;
+		/* z-index: 1; */
+		left: 20%;
+		top: 5%;
+		width: 800px;
+		height: 800px;
+		overflow: auto;
+		/* background-color: rgba(0, 0, 0, 0.5); */
 	}
 
 	.modal-content {
+		display: block;
+		margin: auto;
 		max-width: 100%;
-		/* Mengatur lebar maksimum konten modal */
 		max-height: 100%;
-		/* Mengatur tinggi maksimum konten modal */
-		/* ... tambahkan gaya lainnya yang diperlukan ... */
 	}
 </style>
+
+
+<!-- jQuery -->
+<!-- jQuery -->
+<script src="<?php echo base_url('adminlte/plugins/jquery/jquery.min.js') ?>"></script>
+<!-- jQuery UI 1.11.4 -->
+<script src="<?php echo base_url('adminlte/plugins/jquery-ui/jquery-ui.min.js') ?>"></script>
+<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<script>
+	$.widget.bridge('uibutton', $.ui.button)
+</script>
+<!-- Bootstrap 4 -->
+<script src="<?php echo base_url('adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js') ?>"></script>
+<!-- ChartJS -->
+<script src="<?php echo base_url('adminlte/plugins/chart.js/Chart.min.js') ?>"></script>
+<!-- Sparkline -->
+<script src="<?php echo base_url('adminlte/plugins/sparklines/sparkline.js') ?>"></script>
+<!-- JQVMap -->
+<script src="<?php echo base_url('adminlte/plugins/jqvmap/jquery.vmap.min.js') ?>"></script>
+<script src="<?php echo base_url('adminlte/plugins/jqvmap/maps/jquery.vmap.usa.js') ?>"></script>
+<!-- jQuery Knob Chart -->
+<script src="<?php echo base_url('adminlte/plugins/jquery-knob/jquery.knob.min.js') ?>"></script>
+<!-- daterangepicker -->
+<script src="<?php echo base_url('adminlte/plugins/moment/moment.min.js') ?>"></script>
+<script src="<?php echo base_url('adminlte/plugins/daterangepicker/daterangepicker.js') ?>"></script>
+<!-- Tempusdominus Bootstrap 4 -->
+<script src="<?php echo base_url('adminlte/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js') ?>"></script>
+<!-- Summernote -->
+<script src="<?php echo base_url('adminlte/plugins/summernote/summernote-bs4.min.js') ?>"></script>
+<!-- overlayScrollbars -->
+<script src="<?php echo base_url('adminlte/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') ?>"></script>
+<!-- DataTables  & Plugins -->
+<script src="<?php echo base_url('adminlte/plugins/datatables/jquery.dataTables.min.js') ?>"></script>
+<script src="<?php echo base_url('adminlte/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') ?>"></script>
+<script src="<?php echo base_url('adminlte/plugins/datatables-responsive/js/dataTables.responsive.min.js') ?>"></script>
+<script src="<?php echo base_url('adminlte/plugins/datatables-responsive/js/responsive.bootstrap4.min.js') ?>"></script>
+<script src="<?php echo base_url('adminlte/plugins/datatables-buttons/js/dataTables.buttons.min.js') ?>"></script>
+<script src="<?php echo base_url('adminlte/plugins/datatables-buttons/js/buttons.bootstrap4.min.js') ?>"></script>
+<script src="<?php echo base_url('adminlte/plugins/jszip/jszip.min.js') ?>"></script>
+<script src="<?php echo base_url('adminlte/plugins/pdfmake/pdfmake.min.js') ?>"></script>
+<script src="<?php echo base_url('adminlte/plugins/pdfmake/vfs_fonts.js') ?>"></script>
+<script src="<?php echo base_url('adminlte/plugins/datatables-buttons/js/buttons.html5.min.js') ?>"></script>
+<script src="<?php echo base_url('adminlte/plugins/datatables-buttons/js/buttons.print.min.js') ?>"></script>
+<script src="<?php echo base_url('adminlte/plugins/datatables-buttons/js/buttons.colVis.min.js') ?>"></script>
+<!-- AdminLTE App -->
+<script src="<?php echo base_url('adminlte/dist/js/adminlte.js') ?>"></script>
+<!-- AdminLTE for demo purposes -->
+<!-- <script src="<?php echo base_url('adminlte/dist/js/demo.js') ?>"></script> -->
+<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+<script src="<?php echo base_url('adminlte/dist/js/pages/dashboard.js') ?>"></script>
+<!-- sweet alert -->
+<script src="sweetalert2.all.min.js"></script>
 
 <!-- js -->
 <script src="<?php echo base_url('assets/vendors/scripts/core.js') ?>"></script>

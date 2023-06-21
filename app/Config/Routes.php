@@ -86,6 +86,9 @@ $routes->group('admin', ['filter' => 'authGuard'], function ($routes) {
             $routes->get('hapus_anak_magang/(:any)', 'Admin\CRUDAnakMagang::deleteAnakMagang/$1');
             // restore
             // $routes->match(['get', 'post'], 'kembalikan/(:segment)', 'CRUDAdmin::restore/$1');
+
+            //lihat saran
+            $routes->get('lihat_saran', 'Admin\CRUDAdmin::indexSaran');
         });
 
         // CRUD instansi anak magang
@@ -104,6 +107,9 @@ $routes->group('admin', ['filter' => 'authGuard'], function ($routes) {
         $routes->get('edit_instansi_dinas/(:segment)', 'Admin\CRUDInstansiDinas::indexDeskripsi/$1');
         $routes->post('simpan_data_instansi_dinas/(:segment)', 'Admin\CRUDInstansiDinas::tambahDataInstansiDinas/$1');
         $routes->get('pilih_instansi/(:segment)', 'Admin\CRUDInstansiDinas::indexDeskripsi/$1');
+        $routes->get('titik_lokasi_instansi_dinas/(:segment)', 'Admin\CRUDInstansiDinas::indexPilihTitik/$1');
+        $routes->post('pilih_titik/(:segment)', 'Admin\CRUDInstansiDinas::pilihTitik/$1');
+
 
         //CRUD ANAK MAGANG
         //read
@@ -112,12 +118,17 @@ $routes->group('admin', ['filter' => 'authGuard'], function ($routes) {
         $routes->get('rubah_status_anak_magang/(:segment)', 'Admin\CRUDAnakMagang::change_status/$1'); //aktif nonaktif
         $routes->get('rubah_status_magang/(:segment)', 'Admin\CRUDAnakMagang::change_status_magang/$1');
         $routes->get('kembalikan/(:segment)', 'Admin\CRUDAnakMagang::turnBack/$1');
+
+        //CRUD REKAP JURNAL
+        $routes->get('rekapjurnal', 'Admin\CRUDAnakMagang::rekapJurnal');
     });
 });
 $routes->group('user', ['filter' => 'authGuard'], function ($routes) {
     //user anak magang
     $routes->get('dashboard_magang', 'User\Dashboard::index');
-    $routes->get('profil_magang/(:segment)', 'User\Profile::index/$1');
+    $routes->get('profile_magang/(:segment)', 'User\Profile::index/$1');
+    $routes->post('edit_profile_magang/(:segment)', 'User\Profile::editProfile/$1');
+    $routes->post('edit_foto_magang/(:segment)', 'User\Profile::editFoto/$1');
 
     //jurnal
     $routes->get('jurnal_harian', 'User\Jurnal::index');
@@ -129,19 +140,28 @@ $routes->group('user', ['filter' => 'authGuard'], function ($routes) {
     $routes->get('absen', 'User\Absen::index');
     $routes->get('sertif', 'User\Sertif::index');
     $routes->get('location', 'User\Location::index');
-    $routes->get('kartu', 'User\Kartu::index');
+    $routes->get('kartu/(:segment)', 'User\Kartu::index/$1');
     $routes->get('detail/(:segment)', 'User\Location::indexDetail/$1');
     $routes->get('pilih_instansi/(:segment)', 'User\Location::pilih/$1');
+    $routes->get('batal_pilih_instansi/(:segment)', 'User\Location::batalPilih/$1');
 });
 // $routes->get('dashboard_magang', 'User\Dashboard::index');
 
 $routes->group('api', ['namespace' => 'App\Controllers\api', 'filter' => 'ApiAuth'], function ($routes) {
     // Equivalent to the following:
     $routes->get('test', 'LoginApi::test');
-    $routes->get('index', 'LoginApi::index');
-    $routes->post('login', 'LoginApi::login');
-    $routes->get('csrf/token', 'LoginApi::csrfToken');
+    $routes->get('index', 'LoginApi::datamagang');
 });
+$routes->post('api/login', 'api\LoginApi::login');
+$routes->get('api/datamagang/(:segment)', 'api\LoginApi::datamagang/$1');
+$routes->get('api/jurnal/(:segment)', 'api\LoginApi::jurnal/$1');
+$routes->get('api/anakMagangById/(:segment)', 'api\LoginApi::getAnakMagangById/$1');
+$routes->get('api/editProfileById/(:segment)', 'api\LoginApi::editProfileById/$1');
+$routes->get('api/editFotoById/(:segment)', 'api\LoginApi::editFotoById/$1');
+$routes->get('api/tambahJurnalById/(:segment)', 'api\LoginApi::tambahJurnalById/$1');
+$routes->get('api/editJurnalById/(:segment)', 'api\LoginApi::editJurnalById/$1');
+$routes->get('api/hapusJurnalById/(:segment)', 'api\LoginApi::hapusJurnalById/$1');
+$routes->get('api/logout', 'api\LoginApi::logout');
 
 
 

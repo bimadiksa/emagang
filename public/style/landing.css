@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
 nav {
   background-color: #fff;
   font-size: 15px;
@@ -25,66 +26,73 @@ body {
   color: #fff;
 }
 /* style untuk HERO/landing */
-.hore {
-  padding-top: 50px;
-  background-color: #7227fe;
+/* style Beranda /landing */
+.top-beranda {
+  width: 100%;
+  height: 100vh;
+  background-size: cover;
+  background-position: center center;
+  /* background-color: #144272; */
+  /* position: relative; */
+  background-image: url("../assets/landingbg.png");
 }
-.hero {
-  background-color: #7227fe;
-  padding-top: 60px;
+
+.top-container {
+  padding-top: 0px;
 }
-.judul {
-  font-weight: bolder;
-  font-size: 35px;
-  position: relative; /* agar bisa diatur posisinya */
-  left: -100%; /* awalnya tulisan berada di luar layar di sebelah kiri */
-  animation: judul 1s ease forwards; /* animasi dengan durasi 1 detik */
-}
-.deskripsi {
-  font-weight: lighter;
-  font-size: 18px;
-  position: relative; /* agar bisa diatur posisinya */
-  left: -100%; /* awalnya tulisan berada di luar layar di sebelah kiri */
-  animation: deskripsi 1s ease forwards; /* animasi dengan durasi 1 detik */
-}
-.judul .deskripsi {
+
+.title-top-beranda-1 {
+  font-size: 38px;
+  font-weight: 700;
   font-family: "Poppins", sans-serif;
+  color: #7227fe;
+  margin-bottom: 5px;
 }
-@keyframes judul {
-  to {
-    left: 0; /* tulisan bergerak ke arah kanan hingga muncul di layar */
-  }
-}
-@keyframes deskripsi {
-  to {
-    left: 0; /* tulisan bergerak ke arah kanan hingga muncul di layar */
-  }
-}
-.btn-oke {
-  background-color: transparent;
-  color: #fff;
-  border-radius: 10px;
-  border-color: #fff;
+
+.title-top-beranda-2 {
   font-size: 20px;
-  font-weight: bolder;
-  text-align: center;
-  font-weight: bolder;
+  font-weight: 700;
   font-family: "Poppins", sans-serif;
+  color: #7227fe;
+  margin-bottom: 5px;
 }
-.gambarungu {
-  padding-top: 2rem;
-  position: relative; /* agar bisa diatur posisinya */
-  right: -100%;
-  animation: gambarungu 1s ease forwards; /* animasi dengan durasi 1 detik */
+
+/* Registrasion */
+.registration-section {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: #7227fe36;
+  color: #7227fe;
+  padding: 30px;
+  height: 15rem;
+  text-align: center;
 }
-@keyframes gambarungu {
-  to {
-    right: 0;
-  }
+
+.registration-section h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.registration-section p {
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.register-button {
+  color: white;
+  background-color: #7227fe;
+  border-radius: 5px;
+  border: 2px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
 }
 
 /* style untuk tujuan */
 .boxtujuan {
+  margin-top: 5rem;
   margin-left: 100px;
   margin-right: 100px;
 }
@@ -265,62 +273,89 @@ button {
 }
 
 /* footer */
-footer {
+.section-footer-top {
+  background-color: #7227fe36;
+}
+
+.section-footer-bottom {
   background-color: #7227fe;
-  color: #fff;
-  padding: 50px 0;
 }
 
-.footer-content {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  max-width: 1000px;
-  margin: 0 auto;
+hr.hr-footer {
+  border-top: 1px solid #a5a5a5;
 }
 
-.footer-section {
-  flex-basis: 25%;
-  padding: 20px;
+.footer-left-title {
+  color: #7227fe;
+  font-size: 14pt;
+  font-weight: bold;
 }
 
-.footer-section h3 {
-  margin-bottom: 20px;
-}
-
-.footer ul li {
-  margin-bottom: 10px;
-}
-
-.footer ul li i {
-  margin-right: 5px;
-}
-
-.links a {
-  color: #fff;
-}
-
-.social ul {
-  flex-direction: column;
-  list-style-type: none;
-  display: flex;
-  justify-content: start;
-  align-items: flex-start;
-}
-
-.social ul li {
-  margin: 0;
-}
-
-.social a {
-  color: #fff;
+.footer-left-content {
+  color: #7227fe;
   font-size: 14px;
-  text-decoration: none;
-  margin-right: 20px;
+  line-height: 25px;
+  text-align: justify;
 }
 
-.footer-bottom {
+.footer-copyright {
+  font-size: 10pt;
+  color: #ffffff;
   text-align: center;
-  padding: 10px 0;
-  font-size: 14px;
+}
+
+@media (min-width: 992px) {
+  .content-top-section {
+    font-size: 16px;
+  }
+}
+
+
+.footer-left-content a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.icon-footer-facebook:link {
+  background-color: #3b579d;
+  text-decoration: none;
+}
+
+.icon-footer-facebook:hover,
+.icon-footer-facebook:focus {
+  background: #2d4278;
+  color: #ffffff;
+}
+
+.icon-footer-twitter:link {
+  background-color: #2caae1;
+  text-decoration: none;
+}
+
+.icon-footer-twitter:hover,
+.icon-footer-twitter:focus {
+  background: #1b8dbf;
+  color: #ffffff;
+}
+
+.icon-footer-instagram:link {
+  background-color: #c32aa3;
+  text-decoration: none;
+}
+
+.icon-footer-instagram:hover,
+.icon-footer-instagram:focus {
+  background: #99207f;
+  color: #ffffff;
+}
+
+.icon-footer-youtube:link {
+  background-color: #e52d27;
+  text-decoration: none;
+}
+
+.icon-footer-youtube:hover,
+.icon-footer-youtube:focus {
+  background: #c21d17;
+  color: #ffffff;
 }

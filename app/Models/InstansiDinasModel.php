@@ -16,7 +16,7 @@ class InstansiDinasModel extends Model
     protected $returnType     = 'array';
     protected $useSoftDeletes = true;
 
-    protected $allowedFields = ['kode_instansi', 'deskripsi', 'foto_instansi', 'created_at', 'updated_at'];
+    protected $allowedFields = ['kode_instansi', 'deskripsi', 'foto_instansi', 'created_at', 'updated_at', 'kode_instansi_dinas'];
 
     // Dates
     protected $useTimestamps = true;
@@ -33,7 +33,7 @@ class InstansiDinasModel extends Model
     //ambil data instansiDinas
     public function getInstansiDinas()
     {
-        return $this->findAll();
+        return $this->where('deleted_at', null)->findAll();
     }
     public function getDataFromAPI()
     {

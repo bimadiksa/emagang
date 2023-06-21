@@ -7,6 +7,9 @@ use App\Models\AdminModel;
 use Ramsey\Uuid\Uuid;
 use App\Controllers\BaseController;
 use SebastianBergmann\Type\NullType;
+use CodeIgniter\Database\Query;
+
+
 
 class CRUDInstansiDinas extends BaseController
 {
@@ -39,6 +42,21 @@ class CRUDInstansiDinas extends BaseController
         // dd($data);
         // dd($data['deskripsiFoto']);
         return view('/admin/instansiDinasDeskripsi_view', $data);
+    }
+    public function indexPilihTitik($kode_instansi)
+    {
+        // dd($kode_instansi);
+        $data['title'] = 'Instansi Dinas';
+        $data['active_sidebar'] = 'instansi_dinas';
+        $data['kode_instansi'] = $kode_instansi;
+
+
+        // $data['output'] = $this->instansiDinasModel->getDataFromAPI();
+        // $data['admins'] = $this->adminModel->findAll();
+        // $data['deskripsiFoto'] = $this->instansiDinasModel->findAll();
+
+        // dd($data);
+        return view('/admin/pilih_titik_instansi_dinas', $data);
     }
 
     public function tambahDataInstansiDinas($kode_instansi)
@@ -105,6 +123,52 @@ class CRUDInstansiDinas extends BaseController
                     ];
                     //dd($data);
                     $this->instansiDinasModel->insert($data);
+                }
+            }
+        }
+
+        return redirect()->to('/admin/instansiDinas_view')->with('success', 'Data berhasil diedit');
+    }
+
+    public function pilihTitik($kode_instansi)
+    {
+        // dd($kode_instansi);
+        $data['title'] = 'Instansi Dinas';
+        $data['active_sidebar'] = 'instansi_dinas';
+        $data['output'] = $this->radiusModel->getDataFromAPI();
+        // $nama_foto['nama_foto'] = $$this->instansiDinasModel->where('kode_instansi', $kode_instansi)->first();
+        $data['kode_instansi'] = $kode_instansi;
+        $uuid = Uuid::uuid4()->toString();
+
+        foreach ($data['output'] as $output) {
+            $cekKodeInstansi = $output['kode_instansi'] == $kode_instansi;
+            if ($cekKodeInstansi) {
+                $cekIdRadius = $this->radiusModel->where('kode_instansi_dinas', $kode_instansi)->first();
+
+
+                if ($cekIdRadius) {
+                    $id_radius = $cekIdRadius['id_radius'];
+                    $titik_koordinat_y = $this->request->getVar('titik_koordinat_y');
+                    $titik_koordinat_x = $this->request->getVar('titik_koordinat_x');
+                    $titik_koordinat = $titik_koordinat_x . ", " . $titik_koordinat_y;
+                    $data = [
+                        'id_radius' => $id_radius,
+                        'jarak_radius' => $this->request->getVar('jarak_radius'),
+                        'titik_koordinat' => $titik_koordinat
+                    ];
+                    $this->radiusModel->update($id_radius, $data);
+                } else {
+                    $titik_koordinat_y = $this->request->getVar('titik_koordinat_y');
+                    $titik_koordinat_x = $this->request->getVar('titik_koordinat_x');
+                    $titik_koordinat = $titik_koordinat_x . ", " . $titik_koordinat_y;
+                    $data = [
+                        'id_radius' => $uuid,
+                        'jarak_radius' => $this->request->getVar('jarak_radius'),
+                        'titik_koordinat' => $titik_koordinat,
+                        'kode_instansi_dinas' => $kode_instansi
+                    ];
+                    //dd($data);
+                    $this->radiusModel->save($data);
                 }
             }
         }

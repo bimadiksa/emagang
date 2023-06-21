@@ -1,45 +1,11 @@
-<!doctype html>
-<html lang="en">
+<title><?= $title ?></title>
+<?php echo view('user/template/header'); ?>
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>location</title>
-  <link rel="stylesheet" type="text/css" href="<?= base_url('style/location.css') ?>">
-  <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-</head>
 
-<body>
-  <!-- navbar -->
-  <nav class="navbar fixed-top navbar-sticky">
-    <div class="container">
-      <a class="navbar-brand" href="<?= base_url('user/dashboard_magang') ?>" style="color: #7227FE">
-        <i class="bi bi-arrow-left"></i>
-        <img src="<?= base_url('assets/logo2.png') ?>" alt="Logo" height="30"> E-MAGANG</a>
-      <div class="profile" <?php
-                            $session = \Config\Services::session();
-                            $kode_instansi_dinas = $session->get('kode_instansi_dinas');
-                            if ($kode_instansi_dinas !== null) {
-                              $url = base_url('user/profil_magang/' . session('id_magang'));
-                            } else {
-                              $url = "";
-                            }
-                            ?> onclick="location.href='<?= $url ?>'">
-        <img src="<?= base_url('assets/user.png') ?>" alt="Gambar Profil">
-        <div class="profile-info">
-          <p><?= session('nama') ?></p>
-          <p class="email"><?= session('email') ?></p>
-        </div>
-      </div>
-    </div>
-  </nav>
-  <!-- akhir navbar -->
-
+<div class="content-wrapper">
   <!-- section hero -->
-  <section class="hore text-ligth text-center text-sm-start" id="home">
-    <div class="hero container py-4">
+  <div class="horeloc text-ligth text-center text-sm-start" id="home">
+    <div class="heroloc">
       <div class="welcome">
         <h3>Pilih Lokasi Magang</h3>
       </div>
@@ -52,49 +18,139 @@
       </div>
       <div class="d-sm-flex align-items-center justify-content-between py-4">
         <div>
-          <p class="judul my-3" style="color: #fff;">Tujuan E-MAGANG</p>
-          <p class="deskripsi" style="color: #fff;">E-Magang adalah layanan untuk menunjang sistem administrasi magang di lingkup Pemkab Buleleng Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repellat iusto corrupti repellendus dolore quos expedita perferendis nam magni, quaerat sint..</p>
+          <p class="judulloc" style="color: #fff;">Tujuan E-MAGANG</p>
+          <p class="deskripsiloc" style="color: #fff;">Website e-magang bertujuan untuk meningkatkan aksesibilitas informasi terkait program magang di Kabupaten Buleleng. Dengan adanya website ini, calon peserta magang dapat dengan mudah mengakses informasi tentang persyaratan, prosedur, dan manfaat program magang.</p>
         </div>
 
         <a href="">
-          <img class="gambarungu img-fluid" src="<?php echo base_url('assets/lokasi.png') ?>" alt="Logo" height="100" width="900">
+          <img class="gambarunguloc img-fluid" src="<?php echo base_url('assets/lokasi.png') ?>" alt="Logo" height="700" width="700">
         </a>
       </div>
 
     </div>
-  </section>
+  </div>
   <!-- Akhir section hero -->
 
   <!-- Card -->
   <div class="card-container">
-    <?php
+    <?php if ($kode_instansi_dinas === null) : ?>
+      <?php
+      foreach ($output as $row) :
+      ?>
+        <div class="cardloc">
+          <?php
+          foreach ($deskripsiFoto as $rowDeskripsiFoto) :
+            if ($row['kode_instansi'] == $rowDeskripsiFoto['kode_instansi']) :
+          ?>
+              <img src="<?php echo base_url('images/' . $rowDeskripsiFoto['foto_instansi']); ?>" alt="Gambar 1">
 
-    foreach ($output as $row) :
-    ?>
-      <div class="card">
-        <?php
-        foreach ($deskripsiFoto as $rowDeskripsiFoto) :
-          if ($row['kode_instansi'] == $rowDeskripsiFoto['kode_instansi']) :
-        ?>
-            <img src="<?php echo base_url('images/' . $rowDeskripsiFoto['foto_instansi']); ?>" alt="Gambar 1">
-
-        <?php endif;
-        endforeach; ?>
-        <div class="card-content">
-          <h3><?= $row['ket_ukerja']; ?></h3>
-          <!-- <p>Deskripsi Card 1</p> -->
-          <a href="<?= base_url('user/detail/' . $row['kode_instansi']) ?>"><button class="btncard">Lihat Detail</button></a>
+          <?php endif;
+          endforeach; ?>
+          <div class="cardloc-content">
+            <h3><?= $row['ket_ukerja']; ?></h3>
+            <!-- <p>Deskripsi Card 1</p> -->
+            <a href="<?= base_url('user/detail/' . $row['kode_instansi']) ?>"><button class="btncardloc">Lihat Detail</button></a>
+          </div>
         </div>
-      </div>
-    <?php endforeach; ?>
+      <?php endforeach; ?>
+    <?php else : ?>
+      <?php
+      foreach ($output as $row) :
+        if ($row['kode_instansi'] == $kode_instansi_dinas) :
+      ?>
+          <div class="cardloc">
+            <?php
+            foreach ($deskripsiFoto as $rowDeskripsiFoto) :
+              if ($row['kode_instansi'] == $rowDeskripsiFoto['kode_instansi']) :
+            ?>
+                <img src="<?php echo base_url('images/' . $rowDeskripsiFoto['foto_instansi']); ?>" alt="Gambar 1">
+
+            <?php endif;
+            endforeach; ?>
+            <div class="cardloc-content">
+              <h3><?= $row['ket_ukerja']; ?></h3>
+              <!-- <p>Deskripsi Card 1</p> -->
+              <a href="<?= base_url('user/detail/' . $row['kode_instansi']) ?>"><button class="btncardloc" style="background-color: red;">Lakukan Pembatalan</button></a>
+              <h6 style="color : red;">Silahkan lakukan pembatalan jika ingin merubah tempat magang</h6 style="color : red;">
+            </div>
+          </div>
+      <?php endif;
+      endforeach; ?>
+    <?php endif; ?>
   </div>
 
   <!-- akhir card -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
-</body>
+</div>
 
-</html>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 
+
+<!-- jQuery -->
+<!-- jQuery -->
+<script src="<?php echo base_url('adminlte/plugins/jquery/jquery.min.js') ?>"></script>
+<!-- jQuery UI 1.11.4 -->
+<script src="<?php echo base_url('adminlte/plugins/jquery-ui/jquery-ui.min.js') ?>"></script>
+<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<script>
+  $.widget.bridge('uibutton', $.ui.button)
+</script>
+<!-- Bootstrap 4 -->
+<script src="<?php echo base_url('adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js') ?>"></script>
+<!-- ChartJS -->
+<script src="<?php echo base_url('adminlte/plugins/chart.js/Chart.min.js') ?>"></script>
+<!-- Sparkline -->
+<script src="<?php echo base_url('adminlte/plugins/sparklines/sparkline.js') ?>"></script>
+<!-- JQVMap -->
+<script src="<?php echo base_url('adminlte/plugins/jqvmap/jquery.vmap.min.js') ?>"></script>
+<script src="<?php echo base_url('adminlte/plugins/jqvmap/maps/jquery.vmap.usa.js') ?>"></script>
+<!-- jQuery Knob Chart -->
+<script src="<?php echo base_url('adminlte/plugins/jquery-knob/jquery.knob.min.js') ?>"></script>
+<!-- daterangepicker -->
+<script src="<?php echo base_url('adminlte/plugins/moment/moment.min.js') ?>"></script>
+<script src="<?php echo base_url('adminlte/plugins/daterangepicker/daterangepicker.js') ?>"></script>
+<!-- Tempusdominus Bootstrap 4 -->
+<script src="<?php echo base_url('adminlte/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js') ?>"></script>
+<!-- Summernote -->
+<script src="<?php echo base_url('adminlte/plugins/summernote/summernote-bs4.min.js') ?>"></script>
+<!-- overlayScrollbars -->
+<script src="<?php echo base_url('adminlte/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') ?>"></script>
+<!-- DataTables  & Plugins -->
+<script src="<?php echo base_url('adminlte/plugins/datatables/jquery.dataTables.min.js') ?>"></script>
+<script src="<?php echo base_url('adminlte/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') ?>"></script>
+<script src="<?php echo base_url('adminlte/plugins/datatables-responsive/js/dataTables.responsive.min.js') ?>"></script>
+<script src="<?php echo base_url('adminlte/plugins/datatables-responsive/js/responsive.bootstrap4.min.js') ?>"></script>
+<script src="<?php echo base_url('adminlte/plugins/datatables-buttons/js/dataTables.buttons.min.js') ?>"></script>
+<script src="<?php echo base_url('adminlte/plugins/datatables-buttons/js/buttons.bootstrap4.min.js') ?>"></script>
+<script src="<?php echo base_url('adminlte/plugins/jszip/jszip.min.js') ?>"></script>
+<script src="<?php echo base_url('adminlte/plugins/pdfmake/pdfmake.min.js') ?>"></script>
+<script src="<?php echo base_url('adminlte/plugins/pdfmake/vfs_fonts.js') ?>"></script>
+<script src="<?php echo base_url('adminlte/plugins/datatables-buttons/js/buttons.html5.min.js') ?>"></script>
+<script src="<?php echo base_url('adminlte/plugins/datatables-buttons/js/buttons.print.min.js') ?>"></script>
+<script src="<?php echo base_url('adminlte/plugins/datatables-buttons/js/buttons.colVis.min.js') ?>"></script>
+<!-- AdminLTE App -->
+<script src="<?php echo base_url('adminlte/dist/js/adminlte.js') ?>"></script>
+<!-- AdminLTE for demo purposes -->
+<!-- <script src="<?php echo base_url('adminlte/dist/js/demo.js') ?>"></script> -->
+<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+<script src="<?php echo base_url('adminlte/dist/js/pages/dashboard.js') ?>"></script>
+<!-- sweet alert -->
+<script src="sweetalert2.all.min.js"></script>
+
+<!-- js -->
+<script src="<?php echo base_url('assets/vendors/scripts/core.js') ?>"></script>
+<script src="<?php echo base_url('assets/vendors/scripts/script.min.js') ?>"></script>
+<script src="<?php echo base_url('assets/vendors/scripts/process.js') ?>"></script>
+<script src="<?php echo base_url('assets/vendors/scripts/layout-settings.js') ?>"></script>
+<script src="<?php echo base_url('assets/src/plugins/apexcharts/apexcharts.min.js') ?>"></script>
+<script src="<?php echo base_url('assets/src/plugins/datatables/js/jquery.dataTables.min.js') ?>"></script>
+<script src="<?php echo base_url('assets/src/plugins/datatables/js/dataTables.bootstrap4.min.js') ?>"></script>
+<script src="<?php echo base_url('assets/src/plugins/datatables/js/dataTables.responsive.min.js') ?>"></script>
+<script src="<?php echo base_url('assets/src/plugins/datatables/js/responsive.bootstrap4.min.js') ?>"></script>
+<script src="<?php echo base_url('assets/vendors/scripts/dashboard.js') ?>"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.15.6/dist/sweetalert2.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.5/dist/sweetalert2.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js"></script>
 <script>
   // ambil input search dan card-container
   const searchInput = document.getElementById('searchInput');

@@ -21,13 +21,14 @@ class JurusanModel extends Model
     public function getJurusan($id_jurusan = null)
     {
         if ($id_jurusan == null) {
-            return $this->findAll();
+            return $this->where('deleted_at', null)->findAll();
         }
-        return $this->find($id_jurusan);
+        return $this->where('deleted_at', null)->find($id_jurusan);
     }
+
     public function countDataJurusan()
     {
-        return $this->countAll();
+        return $this->where('deleted_at', null)->countAllResults();
     }
     function getAll()
     {

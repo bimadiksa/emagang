@@ -177,6 +177,16 @@ class CRUDAdmin extends BaseController
         }
     }
 
+    public function indexSaran()
+    {
+        $data['output'] = $this->saranModel->findAll();
+        // dd($data);
+        $data['title'] = 'Saran';
+        $data['active_sidebar'] = 'lihat_saran';
+        // dd($data);
+        return view('/admin/saran_view', $data);
+    }
+
     // public function restore($id_admin)
     // {
 

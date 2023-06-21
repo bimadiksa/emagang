@@ -96,4 +96,16 @@ class CRUDAnakMagang extends BaseController
         // Redirect kembali ke halaman sebelumnya
         return redirect()->back()->with('success', 'BERHASIL DIUBAH. Anak magang telah dikembalikan karena memilih tempat magang yang salah');
     }
+
+    public function rekapJurnal()
+    {
+        $data['title'] = 'Rekap Jurnal';
+        $data['active_sidebar'] = 'rekapjurnal';
+        $data['jurnal'] = $this->jurnalModel->getJurnal();
+        $data['anakMagang'] = $this->anakMagangModel->getAllAnakMagang();
+        $data['admin'] = $this->adminModel->getAllAdmin();
+        $data['instansi'] = $this->instansiDinasModel->getDataFromAPI();
+        // dd($data);
+        return view('/admin/rekapJurnal_view', $data);
+    }
 }

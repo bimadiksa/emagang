@@ -16,7 +16,7 @@ class AnakMagangModel extends Model
     protected $returnType     = 'array';
     protected $useSoftDeletes = true;
 
-    protected $allowedFields = ['id_magang', 'email', 'password', 'nama', 'no_id', 'status', 'status_magang', 'kode_instansi_dinas', 'verification_code', 'is_verified', 'reset_token', 'reset_token_expires_at', 'id_prodi', 'updated_at', 'deleted_at'];
+    protected $allowedFields = ['id_magang', 'email', 'password', 'nama', 'no_id', 'no_hp', 'alamat', 'foto', 'status', 'status_magang', 'kode_instansi_dinas', 'verification_code', 'is_verified', 'reset_token', 'reset_token_expires_at', 'id_prodi', 'updated_at', 'deleted_at'];
 
     // Dates
     protected $useTimestamps = true;
@@ -37,13 +37,22 @@ class AnakMagangModel extends Model
 
     public function getAllAnakMagang()
     {
-        return $this->findAll();
+        return $this->where('deleted_at', null)->findAll();
     }
 
 
-    public function countData()
+
+    public function countDataMagang()
     {
-        return $this->countAll();
+        return $this->where('deleted_at', null)->countAllResults();
+    }
+    public function countDataMagangByKodeInstansi()
+    {
+        $kodeInstansiAdmin = session('kode_instansi_dinas'); // Mengambil kode_instansi admin yang login dari session
+
+        return $this->where('deleted_at', null)
+            ->where('kode_instansi_dinas', $kodeInstansiAdmin)
+            ->countAllResults();
     }
     public function getAnakMagangById($id_magang)
     {

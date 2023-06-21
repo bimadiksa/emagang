@@ -43,7 +43,7 @@ class AdminModel extends Model
     }
     public function getAllAdmin()
     {
-        return $this->findAll();
+        return $this->where('deleted_at', null)->findAll();
     }
 
     public function getAdminById($id_admin)
@@ -70,7 +70,7 @@ class AdminModel extends Model
     }
     public function countData()
     {
-        return $this->countAll();
+        return $this->where('deleted_at', null)->countAllResults();
     }
 
     public function getSameEmailAndPassword()

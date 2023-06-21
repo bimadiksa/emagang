@@ -226,9 +226,10 @@
         <!-- /.container-fluid -->
     </section>
     <!-- /.content -->
+    <?php echo view('admin/template/footer'); ?>
 </div>
 <!-- /.content-wrapper -->
-<?php echo view('admin/template/footer'); ?>
+
 
 <!-- style untuk field status -->
 <style>

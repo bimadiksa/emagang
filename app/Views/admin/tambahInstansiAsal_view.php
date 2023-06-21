@@ -45,7 +45,7 @@
                                     <input type="text" name="nama_instansi" class="form-control" id="nama_instansi" placeholder="Masukkan Nama Instansi">
                                     <div class="input-group-append">
                                         <div class="input-group-text">
-                                            <span class="fas fa-user"></span>
+                                            <span class="fas fa-building"></span>
                                         </div>
                                     </div>
                                 </div>
@@ -54,7 +54,7 @@
                                     <input type="text" name="alamat_instansi" class="form-control" id="alamat_instansi" placeholder="Masukkan Alamat Instansi">
                                     <div class="input-group-append">
                                         <div class="input-group-text">
-                                            <span class="fas fa-envelope"></span>
+                                            <span class="fas fa-map"></span>
                                         </div>
                                     </div>
                                 </div>
@@ -70,7 +70,7 @@
                                     <input type="text" name="nama_jurusan" class="form-control" id="nama_jurusan" placeholder="Masukkan Jurusan">
                                     <div class="input-group-append">
                                         <div class="input-group-text">
-                                            <span class="fas fa-envelope"></span>
+                                            <span class="fas fa-building"></span>
                                         </div>
                                     </div>
                                 </div>
@@ -79,7 +79,7 @@
                                     <input type="text" name="nama_prodi" class="form-control" id="nama_prodi" placeholder="Masukkan Program Studi">
                                     <div class="input-group-append">
                                         <div class="input-group-text">
-                                            <span class="fas fa-envelope"></span>
+                                            <span class="fas fa-building"></span>
                                         </div>
                                     </div>
                                 </div>
@@ -108,7 +108,8 @@
         </div><!-- /.container-fluid -->
     </section>
     <!-- /.content -->
-</div>
-<!-- /.content-wrapper -->
+    <?php echo view('admin/template/footer'); ?>
 
-<?php echo view('admin/template/footer'); ?>
+</div>
+
+<!-- /.content-wrapper -->
